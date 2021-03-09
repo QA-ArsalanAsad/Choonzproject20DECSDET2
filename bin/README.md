@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Choonz-Starter
 
 Starter code for SDET final project specification - music website "Choonz"
@@ -46,3 +47,6 @@ TBD
 ## Acknowledgements
 
 - Probably not needed currently, but teams may wish to credit those outside the academy/stackoverflow users/reddit posts/whatever else they've used here
+=======
+# ChoonzProject20DECSDET2
+>>>>>>> 336ce831e5b01f827e9df7b223371e54320f95b9
