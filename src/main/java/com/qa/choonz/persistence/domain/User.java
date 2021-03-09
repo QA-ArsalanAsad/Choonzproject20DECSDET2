@@ -29,7 +29,7 @@ public class User {
 	@NotNull
 	private String password;
 	
-	@OneToMany(mappedBy = "playlist", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
     private List<Playlist> playlists;
 
