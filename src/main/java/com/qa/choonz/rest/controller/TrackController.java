@@ -2,6 +2,7 @@ package com.qa.choonz.rest.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,17 +18,15 @@ import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.rest.dto.TrackDTO;
 import com.qa.choonz.service.TrackService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/tracks")
 @CrossOrigin
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TrackController {
 
     private TrackService service;
-
-    public TrackController(TrackService service) {
-        super();
-        this.service = service;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<TrackDTO> create(@RequestBody Track track) {

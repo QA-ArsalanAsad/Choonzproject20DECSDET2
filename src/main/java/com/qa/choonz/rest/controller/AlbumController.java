@@ -2,6 +2,7 @@ package com.qa.choonz.rest.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,17 +18,15 @@ import com.qa.choonz.persistence.domain.Album;
 import com.qa.choonz.rest.dto.AlbumDTO;
 import com.qa.choonz.service.AlbumService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/albums")
 @CrossOrigin
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AlbumController {
 
     private AlbumService service;
-
-    public AlbumController(AlbumService service) {
-        super();
-        this.service = service;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<AlbumDTO> create(@RequestBody Album album) {
