@@ -2,6 +2,7 @@ package com.qa.choonz.rest.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,17 +18,15 @@ import com.qa.choonz.persistence.domain.Playlist;
 import com.qa.choonz.rest.dto.PlaylistDTO;
 import com.qa.choonz.service.PlaylistService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/playlists")
 @CrossOrigin
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PlaylistController {
 
     private PlaylistService service;
-
-    public PlaylistController(PlaylistService service) {
-        super();
-        this.service = service;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<PlaylistDTO> create(@RequestBody Playlist playlist) {
