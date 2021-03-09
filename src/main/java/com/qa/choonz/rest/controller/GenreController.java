@@ -2,6 +2,7 @@ package com.qa.choonz.rest.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,6 +25,7 @@ public class GenreController {
 
     private GenreService service;
 
+    @Autowired
     public GenreController(GenreService service) {
         super();
         this.service = service;

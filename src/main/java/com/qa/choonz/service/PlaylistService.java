@@ -4,24 +4,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.choonz.exception.PlaylistNotFoundException;
 import com.qa.choonz.persistence.domain.Playlist;
 import com.qa.choonz.persistence.repository.PlaylistRepository;
 import com.qa.choonz.rest.dto.PlaylistDTO;
+import com.qa.choonz.utils.BeanUtils;
+
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PlaylistService {
 
     private PlaylistRepository repo;
     private ModelMapper mapper;
-
-    public PlaylistService(PlaylistRepository repo, ModelMapper mapper) {
-        super();
-        this.repo = repo;
-        this.mapper = mapper;
-    }
 
     private PlaylistDTO mapToDTO(Playlist playlist) {
         return this.mapper.map(playlist, PlaylistDTO.class);
@@ -42,13 +41,24 @@ public class PlaylistService {
     }
 
     public PlaylistDTO update(Playlist playlist, long id) {
-        Playlist toUpdate = this.repo.findById(id).orElseThrow(PlaylistNotFoundException::new);
+    	
+    	Playlist toUpdate = this.repo.findById(id).orElseThrow(PlaylistNotFoundException::new);
         toUpdate.setName(toUpdate.getName());
-        toUpdate.setDescription(toUpdate.getDescription());
-        toUpdate.setArtwork(toUpdate.getArtwork());
-        toUpdate.setTracks(toUpdate.getTracks());
+        BeanUtils.mergeNotNull(playlist, toUpdate);
         Playlist updated = this.repo.save(toUpdate);
         return this.mapToDTO(updated);
+    	
+    	
+    	        // Old Update Method \\
+			/*
+			 * Playlist toUpdate =
+			 * this.repo.findById(id).orElseThrow(PlaylistNotFoundException::new);
+			 * toUpdate.setName(toUpdate.getName());
+			 * toUpdate.setDescription(toUpdate.getDescription());
+			 * toUpdate.setArtwork(toUpdate.getArtwork());
+			 * toUpdate.setTracks(toUpdate.getTracks()); Playlist updated =
+			 * this.repo.save(toUpdate); return this.mapToDTO(updated);
+			 */
     }
 
     public boolean delete(long id) {
