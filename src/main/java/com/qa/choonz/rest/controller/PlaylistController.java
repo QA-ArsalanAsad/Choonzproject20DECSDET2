@@ -18,18 +18,15 @@ import com.qa.choonz.persistence.domain.Playlist;
 import com.qa.choonz.rest.dto.PlaylistDTO;
 import com.qa.choonz.service.PlaylistService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/playlists")
 @CrossOrigin
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class PlaylistController {
 
     private PlaylistService service;
-
-    @Autowired
-    public PlaylistController(PlaylistService service) {
-        super();
-        this.service = service;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<PlaylistDTO> create(@RequestBody Playlist playlist) {

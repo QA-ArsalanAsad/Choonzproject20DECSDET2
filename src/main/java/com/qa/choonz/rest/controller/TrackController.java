@@ -18,18 +18,15 @@ import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.rest.dto.TrackDTO;
 import com.qa.choonz.service.TrackService;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
 @RequestMapping("/tracks")
 @CrossOrigin
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TrackController {
 
     private TrackService service;
-
-    @Autowired
-    public TrackController(TrackService service) {
-        super();
-        this.service = service;
-    }
 
     @PostMapping("/create")
     public ResponseEntity<TrackDTO> create(@RequestBody Track track) {
