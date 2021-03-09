@@ -21,7 +21,6 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Playlist {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -43,10 +42,9 @@ public class Playlist {
 
 	@OneToMany(mappedBy = "playlist", cascade = CascadeType.ALL)
 	private List<Track> tracks;
-	
+
 	@OneToOne
 	private User user;
-	
 
 	public Playlist(long id, @NotNull @Size(max = 100) String name, @NotNull @Size(max = 500) String description,
 			@NotNull @Size(max = 1000) String artwork, List<Track> tracks) {
@@ -66,6 +64,5 @@ public class Playlist {
 		this.artwork = artwork;
 		this.tracks = tracks;
 	}
-
 
 }
