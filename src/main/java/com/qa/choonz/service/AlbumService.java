@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.choonz.exception.AlbumNotFoundException;
 import com.qa.choonz.persistence.domain.Album;
+import com.qa.choonz.persistence.domain.Artist;
 import com.qa.choonz.persistence.repository.AlbumRepository;
 import com.qa.choonz.rest.dto.AlbumDTO;
 import com.qa.choonz.utils.BeanUtils;
@@ -19,15 +20,21 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AlbumService {
 
-    private AlbumRepository repo;
-    private ModelMapper mapper;
+    private final AlbumRepository repo;
+    private final ModelMapper mapper;
 
     private AlbumDTO mapToDTO(Album album) {
         return this.mapper.map(album, AlbumDTO.class);
     }
 
-    public AlbumDTO create(Album album) {
-        Album created = this.repo.save(album);
+    private Album mapFromDTO(AlbumDTO albumDTO) {
+        return this.mapper.map(albumDTO, Album.class);
+    }
+
+    public AlbumDTO create(Long artistID, AlbumDTO albumDTO) {
+    	Album tempAlbum = this.mapFromDTO(albumDTO);
+    	tempAlbum.setArtist(new Artist(artistID));
+        Album created = this.repo.save(tempAlbum);
         return this.mapToDTO(created);
     }
 
