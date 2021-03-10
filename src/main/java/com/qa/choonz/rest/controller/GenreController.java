@@ -18,15 +18,18 @@ import com.qa.choonz.persistence.domain.Genre;
 import com.qa.choonz.rest.dto.GenreDTO;
 import com.qa.choonz.service.GenreService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/genres")
 @CrossOrigin
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class GenreController {
 
     private GenreService service;
+    
+    @Autowired
+    public GenreController(GenreService service)
+    {
+    	this.service = service;
+    }
 
  
     @PostMapping("/create")

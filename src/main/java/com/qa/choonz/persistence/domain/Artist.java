@@ -31,6 +31,13 @@ public class Artist {
 
 	@OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
 	private List<Album> albums;
+	
+	
+	public Artist(String name) {
+		super();
+		this.name = name;
+		
+	}
 
 	public Artist(long id, @NotNull @Size(max = 100) String name, List<Album> albums) {
 		super();

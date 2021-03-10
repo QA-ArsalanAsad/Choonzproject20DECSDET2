@@ -18,15 +18,18 @@ import com.qa.choonz.persistence.domain.Album;
 import com.qa.choonz.rest.dto.AlbumDTO;
 import com.qa.choonz.service.AlbumService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/albums")
 @CrossOrigin
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AlbumController {
 
     private AlbumService service;
+    
+    @Autowired
+    public AlbumController(AlbumService service)
+    {
+    	this.service = service;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<AlbumDTO> create(@RequestBody Album album) {

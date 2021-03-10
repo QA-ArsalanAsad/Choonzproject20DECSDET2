@@ -18,19 +18,23 @@ import com.qa.choonz.persistence.domain.Artist;
 import com.qa.choonz.rest.dto.ArtistDTO;
 import com.qa.choonz.service.ArtistService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/artists")
 @CrossOrigin
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ArtistController {
 
     private ArtistService service;
+    
+    @Autowired
+    public ArtistController(ArtistService service)
+    {
+    	this.service = service;
+    }
 
     @PostMapping("/create")
     public ResponseEntity<ArtistDTO> create(@RequestBody Artist artist) {
         return new ResponseEntity<ArtistDTO>(this.service.create(artist), HttpStatus.CREATED);
+      
     }
 
     @GetMapping("/read")
