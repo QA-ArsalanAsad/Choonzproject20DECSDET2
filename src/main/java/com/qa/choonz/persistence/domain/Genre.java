@@ -46,12 +46,16 @@ public class Genre {
 		this.albums = albums;
 	}
 
-	public Genre(@NotNull @Size(max = 100) String name, @NotNull @Size(max = 250) String description,
-			List<Album> albums) {
+	public Genre(@NotNull @Size(max = 100) String name, @NotNull @Size(max = 250) String description) {
 		super();
 		this.name = name;
 		this.description = description;
-		this.albums = albums;
+
+	}
+
+	public Genre(long id) {
+		super();
+		this.id = id;
 	}
 
 }
