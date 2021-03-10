@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.choonz.exception.PlaylistNotFoundException;
 import com.qa.choonz.persistence.domain.Playlist;
+import com.qa.choonz.persistence.domain.User;
 import com.qa.choonz.persistence.repository.PlaylistRepository;
 import com.qa.choonz.rest.dto.PlaylistDTO;
 import com.qa.choonz.utils.BeanUtils;
@@ -25,9 +26,15 @@ public class PlaylistService {
 	private PlaylistDTO mapToDTO(Playlist playlist) {
 		return this.mapper.map(playlist, PlaylistDTO.class);
 	}
-
-	public PlaylistDTO create(Playlist playlist) {
-		Playlist created = this.repo.save(playlist);
+	
+	private Playlist mapFromDTO(PlaylistDTO playlistDTO) {
+		return this.mapper.map(playlistDTO, Playlist.class);
+	}
+	
+	public PlaylistDTO create(PlaylistDTO playlistDTO, Long userID) {
+		Playlist tempPlaylist = this.mapFromDTO(playlistDTO);
+		tempPlaylist.setUser(new User(userID));
+		Playlist created = this.repo.save(tempPlaylist);
 		return this.mapToDTO(created);
 	}
 

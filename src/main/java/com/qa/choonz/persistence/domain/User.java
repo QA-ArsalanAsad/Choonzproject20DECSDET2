@@ -33,19 +33,22 @@ public class User {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Playlist> playlists;
 
-	public User(Long id, @NotNull String userName, @NotNull String password, List<Playlist> playlists) {
+	public User(Long id, @NotNull String userName, @NotNull String password) {
 		super();
 		this.id = id;
 		this.userName = userName;
 		this.password = password;
-		this.playlists = playlists;
 	}
 
-	public User(@NotNull String userName, @NotNull String password, List<Playlist> playlists) {
+	public User(@NotNull String userName, @NotNull String password) {
 		super();
 		this.userName = userName;
 		this.password = password;
-		this.playlists = playlists;
+	}
+	
+	public User(Long id) {
+		super();
+		this.id = id;
 	}
 
 }
