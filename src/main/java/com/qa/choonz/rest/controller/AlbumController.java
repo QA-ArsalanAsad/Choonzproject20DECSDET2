@@ -32,9 +32,9 @@ public class AlbumController {
     	this.service = service;
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<AlbumDTO> create(@RequestBody Album album) {
-        return new ResponseEntity<AlbumDTO>(this.service.create(album), HttpStatus.CREATED);
+    @PostMapping("/create/{artistID}")
+    public ResponseEntity<AlbumDTO> create(@RequestBody AlbumDTO albumDTO, @PathVariable Long artistID) {
+        return new ResponseEntity<AlbumDTO>(this.service.create(artistID, albumDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/read")
