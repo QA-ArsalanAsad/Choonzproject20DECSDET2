@@ -12,6 +12,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.qa.choonz.rest.dto.AlbumDTO;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -32,17 +34,23 @@ public class Artist {
 	@OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
 	private List<Album> albums;
 
-	public Artist(long id, @NotNull @Size(max = 100) String name, List<Album> albums) {
+	
+	public Artist(Long id)
+	{
+
+		this.id = id;
+	}
+
+	public Artist(long id, @NotNull @Size(max = 100) String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.albums = albums;
 	}
 
-	public Artist(@NotNull @Size(max = 100) String name, List<Album> albums) {
+	public Artist(@NotNull @Size(max = 100) String name) {
 		super();
 		this.name = name;
-		this.albums = albums;
+
 	}
 
 }
