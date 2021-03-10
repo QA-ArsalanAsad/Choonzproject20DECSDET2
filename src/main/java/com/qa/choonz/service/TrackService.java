@@ -19,52 +19,50 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class TrackService {
 
-    private TrackRepository repo;
-    private ModelMapper mapper;
+	private final TrackRepository repo;
+	private final ModelMapper mapper;
 
-    private TrackDTO mapToDTO(Track track) {
-        return this.mapper.map(track, TrackDTO.class);
-    }
+	private TrackDTO mapToDTO(Track track) {
+		return this.mapper.map(track, TrackDTO.class);
+	}
 
-    public TrackDTO create(Track track) {
-        Track created = this.repo.save(track);
-        return this.mapToDTO(created);
-    }
+	public TrackDTO create(Track track) {
+		Track created = this.repo.save(track);
+		return this.mapToDTO(created);
+	}
 
-    public List<TrackDTO> read() {
-        return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
-    }
+	public List<TrackDTO> read() {
+		return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
+	}
 
-    public TrackDTO read(long id) {
-        Track found = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
-        return this.mapToDTO(found);
-    }
+	public TrackDTO read(long id) {
+		Track found = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
+		return this.mapToDTO(found);
+	}
 
-    public TrackDTO update(Track track, long id) {
-    	
-        Track toUpdate = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
-        toUpdate.setName(track.getName());
-        BeanUtils.mergeNotNull(track, toUpdate);
-        Track updated = this.repo.save(toUpdate);
-        return this.mapToDTO(updated);
-    	 
-    	 
-    	 
-    	     	// Old Update Method \\\
-			/*
-			 * Track toUpdate =
-			 * this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
-			 * toUpdate.setName(track.getName()); toUpdate.setAlbum(track.getAlbum());
-			 * toUpdate.setDuration(track.getDuration());
-			 * toUpdate.setLyrics(track.getLyrics());
-			 * toUpdate.setPlaylist(track.getPlaylist()); Track updated =
-			 * this.repo.save(toUpdate); return this.mapToDTO(updated);
-			 */
-    }
+	public TrackDTO update(Track track, long id) {
 
-    public boolean delete(long id) {
-        this.repo.deleteById(id);
-        return !this.repo.existsById(id);
-    }
+		Track toUpdate = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
+		toUpdate.setName(track.getName());
+		BeanUtils.mergeNotNull(track, toUpdate);
+		Track updated = this.repo.save(toUpdate);
+		return this.mapToDTO(updated);
+
+		// Old Update Method \\\
+		/*
+		 * Track toUpdate =
+		 * this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
+		 * toUpdate.setName(track.getName()); toUpdate.setAlbum(track.getAlbum());
+		 * toUpdate.setDuration(track.getDuration());
+		 * toUpdate.setLyrics(track.getLyrics());
+		 * toUpdate.setPlaylist(track.getPlaylist()); Track updated =
+		 * this.repo.save(toUpdate); return this.mapToDTO(updated);
+		 */
+	}
+
+	public boolean delete(long id) {
+		this.repo.deleteById(id);
+		return !this.repo.existsById(id);
+	}
 
 }
