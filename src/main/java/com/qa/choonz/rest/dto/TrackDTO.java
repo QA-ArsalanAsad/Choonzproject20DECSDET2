@@ -17,6 +17,5 @@ public class TrackDTO {
 	private List<AlbumDTO> albums = new ArrayList<>();
 	private List <PlaylistDTO> playlists = new ArrayList<>();
 	private int duration;
-	private String lyrics;
-
+	private String lyrics; 
 }
