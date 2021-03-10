@@ -22,6 +22,7 @@ import com.qa.choonz.service.ArtistService;
 @RestController
 @RequestMapping("/artists")
 @CrossOrigin
+
 public class ArtistController {
 
     private ArtistService service;
