@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,19 +19,22 @@ import com.qa.choonz.persistence.domain.Album;
 import com.qa.choonz.rest.dto.AlbumDTO;
 import com.qa.choonz.service.AlbumService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/albums")
 @CrossOrigin
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class AlbumController {
 
     private AlbumService service;
+    
+    @Autowired
+    public AlbumController(AlbumService service)
+    {
+    	this.service = service;
+    }
 
-    @PostMapping("/create")
-    public ResponseEntity<AlbumDTO> create(@RequestBody Album album) {
-        return new ResponseEntity<AlbumDTO>(this.service.create(album), HttpStatus.CREATED);
+    @PostMapping("/create/{artistID}")
+    public ResponseEntity<AlbumDTO> create(@RequestBody AlbumDTO albumDTO, @PathVariable Long artistID) {
+        return new ResponseEntity<AlbumDTO>(this.service.create(artistID, albumDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/read")
@@ -43,7 +47,7 @@ public class AlbumController {
         return new ResponseEntity<AlbumDTO>(this.service.read(id), HttpStatus.OK);
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<AlbumDTO> update(@RequestBody Album album, @PathVariable long id) {
         return new ResponseEntity<AlbumDTO>(this.service.update(album, id), HttpStatus.ACCEPTED);
     }
