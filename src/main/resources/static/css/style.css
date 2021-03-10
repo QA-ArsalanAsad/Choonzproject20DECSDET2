@@ -51,3 +51,26 @@ border: 1px solid #ced4da;
 .customListItem:before {
   content: "- "!important;
 }
+
+.form-user {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.userFormPage {
+  display: -ms-flexbox;
+  display: -webkit-box;
+  display: flex;
+  -ms-flex-align: center;
+  -ms-flex-pack: center;
+  -webkit-box-align: center;
+  align-items: center;
+  text-align: center;
+  -webkit-box-pack: center;
+  justify-content: center;
+  padding-top: 140px;
+  padding-bottom: 40px;
+  height: 100%;
+}
