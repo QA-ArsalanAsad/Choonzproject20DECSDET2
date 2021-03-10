@@ -1,8 +1,7 @@
 package com.qa.choonz.rest.dto;
 
+import java.util.ArrayList;
 import java.util.List;
-
-import com.qa.choonz.persistence.domain.Track;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,7 @@ public class PlaylistDTO {
 	private String name;
 	private String description;
 	private String artwork;
-	private List<Track> tracks;
+	private List<TrackDTO> tracks = new ArrayList<>();
 
 //	public PlaylistDTO(long id, String name, String description, String artwork, List<Track> tracks) {
 //		super();
