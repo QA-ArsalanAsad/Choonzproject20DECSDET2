@@ -2,15 +2,18 @@ package com.qa.choonz.persistence.domain;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,20 +32,23 @@ public class Artist {
 	@Column(unique = true)
 	private String name;
 
-	@OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "artist", fetch = FetchType.EAGER)
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Album> albums;
 
-	public Artist(long id, @NotNull @Size(max = 100) String name, List<Album> albums) {
+	public Artist(long id, @NotNull @Size(max = 100) String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.albums = albums;
 	}
-
-	public Artist(@NotNull @Size(max = 100) String name, List<Album> albums) {
+	
+	public Artist(String name) {
 		super();
 		this.name = name;
-		this.albums = albums;
 	}
-
+	
+	public Artist(long id) {
+		super();
+		this.id = id;
+	}
 }

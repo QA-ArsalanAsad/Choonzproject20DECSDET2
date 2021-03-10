@@ -19,15 +19,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ArtistService {
 
-    private ArtistRepository repo;
-    private ModelMapper mapper;
+    private final ArtistRepository repo;
+    
+    private final ModelMapper mapper;
  
     private ArtistDTO mapToDTO(Artist artist) {
         return this.mapper.map(artist, ArtistDTO.class);
     }
+    
+    private Artist mapFromDTO(ArtistDTO artistDTO) {
+        return this.mapper.map(artistDTO, Artist.class);
+    }
 
-    public ArtistDTO create(Artist artist) {
-        Artist created = this.repo.save(artist);
+    public ArtistDTO create(ArtistDTO artistDTO) {
+        Artist created = this.repo.save(this.mapFromDTO(artistDTO));
         return this.mapToDTO(created);
     }
 

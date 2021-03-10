@@ -16,7 +16,6 @@ public class AlbumDTO {
 	private long id;
 	private String name;
 	private List<Track> tracks;
-	private Artist artist;
 	private Genre genre;
 	private String cover;
 
