@@ -30,12 +30,9 @@ public class Artist {
 	private String name;
 
 	@OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
-	private List<AlbumDTO> albums;
-	
-	
-	
-	public Artist(Long id)
-	{
+	private List<Album> albums;
+
+	public Artist(Long id) {
 		this.id = id;
 	}
 
@@ -45,12 +42,10 @@ public class Artist {
 		this.name = name;
 	}
 
-
 	public Artist(@NotNull @Size(max = 100) String name) {
 		super();
 		this.name = name;
 
 	}
-
 
 }
