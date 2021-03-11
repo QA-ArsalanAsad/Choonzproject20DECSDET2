@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.choonz.persistence.domain.Playlist;
 import com.qa.choonz.rest.dto.PlaylistDTO;
 import com.qa.choonz.service.PlaylistService;
 
@@ -50,11 +49,6 @@ public class PlaylistController {
 	@PutMapping("/update/{id}")
 	public ResponseEntity<PlaylistDTO> update(@RequestBody PlaylistDTO playlistDTO, @PathVariable long id) {
 		return new ResponseEntity<>(this.service.update(playlistDTO, id), HttpStatus.ACCEPTED);
-	}
-
-	@PutMapping("/update/{id}/{method}/{trackID}")
-	public ResponseEntity<PlaylistDTO> update(@RequestBody PlaylistDTO playlistDTO, @PathVariable long id, @PathVariable String method, @PathVariable long trackID) {
-		return new ResponseEntity<>(this.service.update(playlistDTO, id, method, trackID), HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("/delete/{id}")
