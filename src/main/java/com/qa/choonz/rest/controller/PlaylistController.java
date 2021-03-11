@@ -46,10 +46,15 @@ public class PlaylistController {
 	public ResponseEntity<PlaylistDTO> read(@PathVariable long id) {
 		return ResponseEntity.ok(this.service.read(id));
 	}
-
+	
 	@PutMapping("/update/{id}")
-	public ResponseEntity<PlaylistDTO> update(@RequestBody Playlist playlist, @PathVariable long id) {
-		return new ResponseEntity<>(this.service.update(playlist, id), HttpStatus.ACCEPTED);
+	public ResponseEntity<PlaylistDTO> update(@RequestBody PlaylistDTO playlistDTO, @PathVariable long id) {
+		return new ResponseEntity<>(this.service.update(playlistDTO, id), HttpStatus.ACCEPTED);
+	}
+
+	@PutMapping("/update/{id}/{method}/{trackID}")
+	public ResponseEntity<PlaylistDTO> update(@RequestBody PlaylistDTO playlistDTO, @PathVariable long id, @PathVariable String method, @PathVariable long trackID) {
+		return new ResponseEntity<>(this.service.update(playlistDTO, id, method, trackID), HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("/delete/{id}")
