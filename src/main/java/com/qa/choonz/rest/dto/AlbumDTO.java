@@ -1,5 +1,6 @@
 package com.qa.choonz.rest.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.qa.choonz.persistence.domain.Artist;
@@ -15,8 +16,7 @@ public class AlbumDTO {
 
 	private long id;
 	private String name;
-	private List<TrackDTO> tracks;
-	private Genre genre;
+	private List<TrackDTO> tracks = new ArrayList<>();
 	private String cover;
 
 	// IS THIS REQUIRED?
