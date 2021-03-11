@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -28,10 +29,10 @@ public class Track {
 	@Column(unique = true)
 	private String name;
 
-	@NotNull
+	@ManyToOne
 	private Album album;
 
-	@ManyToMany(mappedBy = "tracks")
+	@ManyToMany
 	private List <Playlist> playlists;
 
 	// in seconds

@@ -30,8 +30,8 @@ public class TrackController {
 	}
 
 	@PostMapping("/create/{albumID}")
-	public ResponseEntity<TrackDTO> create(@RequestBody Track track, @PathVariable Long albumID) {
-		return new ResponseEntity<>(this.service.create(track, albumID), HttpStatus.CREATED);
+	public ResponseEntity<TrackDTO> create(@RequestBody TrackDTO trackDTO, @PathVariable Long albumID) {
+		return new ResponseEntity<>(this.service.create(trackDTO, albumID), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/read")
