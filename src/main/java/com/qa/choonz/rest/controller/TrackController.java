@@ -21,7 +21,6 @@ import com.qa.choonz.service.TrackService;
 @RestController
 @RequestMapping("/tracks")
 @CrossOrigin
-
 public class TrackController {
 
 	private TrackService service;
@@ -30,9 +29,9 @@ public class TrackController {
 		this.service = service;
 	}
 
-	@PostMapping("/create")
-	public ResponseEntity<TrackDTO> create(@RequestBody Track track) {
-		return new ResponseEntity<>(this.service.create(track), HttpStatus.CREATED);
+	@PostMapping("/create/{albumID}")
+	public ResponseEntity<TrackDTO> create(@RequestBody Track track, @PathVariable Long albumID) {
+		return new ResponseEntity<>(this.service.create(track, albumID), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/read")
