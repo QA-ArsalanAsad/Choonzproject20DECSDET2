@@ -41,29 +41,19 @@ public class Playlist {
 	@Column(unique = true)
 	private String artwork;
 
-	@ManyToMany(mappedBy = "playlists")
+	@ManyToMany
 	private List<Track> tracks;
 
 	@OneToOne
 	private User user;
 
 	public Playlist(long id, @NotNull @Size(max = 100) String name, @NotNull @Size(max = 500) String description,
-			@NotNull @Size(max = 1000) String artwork, List<Track> tracks) {
+			@NotNull @Size(max = 1000) String artwork) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.artwork = artwork;
-		this.tracks = tracks;
-	}
-
-	public Playlist(@NotNull @Size(max = 100) String name, @NotNull @Size(max = 500) String description,
-			@NotNull @Size(max = 1000) String artwork, List<Track> tracks) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.artwork = artwork;
-		this.tracks = tracks;
 	}
 
 	public Playlist(@NotNull @Size(max = 100) String name, @NotNull @Size(max = 500) String description,
@@ -72,7 +62,10 @@ public class Playlist {
 		this.name = name;
 		this.description = description;
 		this.artwork = artwork;
-
+	}
+	
+	public Playlist(long id) {
+		this.id = id;
 	}
 
 }

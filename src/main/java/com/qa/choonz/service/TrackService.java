@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.choonz.exception.TrackNotFoundException;
 import com.qa.choonz.persistence.domain.Album;
+import com.qa.choonz.persistence.domain.Playlist;
 import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.persistence.repository.TrackRepository;
 import com.qa.choonz.rest.dto.TrackDTO;
@@ -47,24 +48,32 @@ public class TrackService {
 		return this.mapToDTO(found);
 	}
 
-	public TrackDTO update(Track track, long id) {
+	public TrackDTO update(TrackDTO trackDTO, long id) {
 
 		Track toUpdate = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
-		toUpdate.setName(track.getName());
-		BeanUtils.mergeNotNull(track, toUpdate);
+		BeanUtils.mergeNotNull(mapFromDTO(trackDTO), toUpdate);
 		Track updated = this.repo.save(toUpdate);
 		return this.mapToDTO(updated);
+		
+	}
 
-		// Old Update Method \\\
-		/*
-		 * Track toUpdate =
-		 * this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
-		 * toUpdate.setName(track.getName()); toUpdate.setAlbum(track.getAlbum());
-		 * toUpdate.setDuration(track.getDuration());
-		 * toUpdate.setLyrics(track.getLyrics());
-		 * toUpdate.setPlaylist(track.getPlaylist()); Track updated =
-		 * this.repo.save(toUpdate); return this.mapToDTO(updated);
-		 */
+	public TrackDTO update(TrackDTO trackDTO, long id, String method, long playlistID) {
+
+		Track toUpdate = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
+		List<Playlist> tmpPlaylist = toUpdate.getPlaylists();
+		
+		if (method == "add") {
+			tmpPlaylist.add(new Playlist(playlistID));
+		} else if (method == "remove") {
+			tmpPlaylist.remove(new Playlist(playlistID));
+		}
+		
+		toUpdate.setPlaylists(tmpPlaylist);
+		
+		BeanUtils.mergeNotNull(mapFromDTO(trackDTO), toUpdate);
+		Track updated = this.repo.save(toUpdate);
+		return this.mapToDTO(updated);
+		
 	}
 
 	public boolean delete(long id) {

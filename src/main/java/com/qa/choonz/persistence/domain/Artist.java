@@ -12,8 +12,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.qa.choonz.rest.dto.AlbumDTO;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
