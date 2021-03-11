@@ -14,7 +14,6 @@ public class TrackDTO {
 
 	private long id;
 	private String name;
-	private Album album;
 	private List <PlaylistDTO> playlists = new ArrayList<>();
 	private int duration;
 	private String lyrics; 
