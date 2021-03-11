@@ -29,7 +29,7 @@ public class Track {
 	@Column(unique = true)
 	private String name;
 
-	@ManyToOne
+	@NotNull
 	private Album album;
 
 	@ManyToMany(mappedBy = "tracks")
