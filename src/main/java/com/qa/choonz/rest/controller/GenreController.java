@@ -27,36 +27,35 @@ public class GenreController {
     private GenreService service;
     
     @Autowired
-    public GenreController(GenreService service)
-    {
+    public GenreController(GenreService service){
     	this.service = service;
     }
 
  
     @PostMapping("/create")
     public ResponseEntity<GenreDTO> create(@RequestBody Genre genre) {
-        return new ResponseEntity<GenreDTO>(this.service.create(genre), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.service.create(genre), HttpStatus.CREATED);
     }
 
     @GetMapping("/read")
     public ResponseEntity<List<GenreDTO>> read() {
-        return new ResponseEntity<List<GenreDTO>>(this.service.read(), HttpStatus.OK);
+        return ResponseEntity.ok(this.service.read());
     }
 
     @GetMapping("/read/{id}")
     public ResponseEntity<GenreDTO> read(@PathVariable long id) {
-        return new ResponseEntity<GenreDTO>(this.service.read(id), HttpStatus.OK);
+        return ResponseEntity.ok(this.service.read(id));
     }
 
     @PutMapping("/update/{id}")
     public ResponseEntity<GenreDTO> update(@RequestBody Genre genre, @PathVariable long id) {
-        return new ResponseEntity<GenreDTO>(this.service.update(genre, id), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(this.service.update(genre, id), HttpStatus.ACCEPTED);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<GenreDTO> delete(@PathVariable long id) {
         return this.service.delete(id) ? new ResponseEntity<GenreDTO>(HttpStatus.NO_CONTENT)
-                : new ResponseEntity<GenreDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
+                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 }
