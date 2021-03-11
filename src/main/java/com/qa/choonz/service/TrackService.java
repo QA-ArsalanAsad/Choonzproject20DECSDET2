@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.choonz.exception.TrackNotFoundException;
+import com.qa.choonz.persistence.domain.Album;
 import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.persistence.repository.TrackRepository;
 import com.qa.choonz.rest.dto.TrackDTO;
@@ -25,9 +26,15 @@ public class TrackService {
 	private TrackDTO mapToDTO(Track track) {
 		return this.mapper.map(track, TrackDTO.class);
 	}
-
-	public TrackDTO create(Track track) {
-		Track created = this.repo.save(track);
+	
+	private Track mapFromDTO(TrackDTO trackDTO) {
+		return this.mapper.map(trackDTO, Track.class);
+	}
+	
+	public TrackDTO create(TrackDTO trackDTO, Long albumID) {
+		Track tmpTrack = this.mapFromDTO(trackDTO);
+		tmpTrack.setAlbum(new Album(albumID));
+		Track created = this.repo.save(tmpTrack);
 		return this.mapToDTO(created);
 	}
 
