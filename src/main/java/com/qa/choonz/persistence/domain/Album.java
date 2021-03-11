@@ -69,5 +69,9 @@ public class Album {
 		this.name = name;
 		this.cover = cover;
 	}
+	
+	public Album(Long id) {
+		this.id = id;
+	}
 
 }
