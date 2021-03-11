@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.rest.dto.TrackDTO;
 import com.qa.choonz.service.TrackService;
 
@@ -45,8 +44,13 @@ public class TrackController {
 	}
 
 	@PutMapping("/update/{id}")
-	public ResponseEntity<TrackDTO> update(@RequestBody Track track, @PathVariable long id) {
-		return new ResponseEntity<>(this.service.update(track, id), HttpStatus.ACCEPTED);
+	public ResponseEntity<TrackDTO> update(@RequestBody TrackDTO trackDTO, @PathVariable long id) {
+		return new ResponseEntity<>(this.service.update(trackDTO, id), HttpStatus.ACCEPTED);
+	}
+	
+	@PutMapping("/update/{id}/{method}/{playlistID}")
+	public ResponseEntity<TrackDTO> update(@RequestBody TrackDTO trackDTO, @PathVariable long id, @PathVariable String method, @PathVariable long playlistID) {
+		return new ResponseEntity<>(this.service.update(trackDTO, id), HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("delete/{id}")

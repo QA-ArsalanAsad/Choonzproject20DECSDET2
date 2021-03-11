@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -32,7 +33,7 @@ public class Track {
 	@ManyToOne
 	private Album album;
 
-	@ManyToMany
+	@ManyToMany(mappedBy = "tracks")
 	private List <Playlist> playlists;
 
 	// in seconds
@@ -40,13 +41,11 @@ public class Track {
 
 	private String lyrics;
 
-	public Track(long id, @NotNull @Size(max = 100) String name, Album album, List<Playlist> playlists, int duration,
+	public Track(long id, @NotNull @Size(max = 100) String name, int duration,
 			String lyrics) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.album = album;
-		this.playlists = playlists;
 		this.duration = duration;
 		this.lyrics = lyrics;
 	}
@@ -57,5 +56,8 @@ public class Track {
 		this.duration = duration;
 		this.lyrics = lyrics;
 	}
-
+	
+	public Track(long id) {
+		this.id = id;
+	}
 }
