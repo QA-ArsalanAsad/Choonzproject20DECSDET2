@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 public class Playlist_TrackDTO {
 
 	private long id;
+	private TrackDTO track;
 
 }
