@@ -14,7 +14,7 @@ public class PlaylistDTO {
 	private long id;
 	private String name;
 	private String description;
-	private List <TrackDTO> tracks = new ArrayList<>();
+	private List <Playlist_TrackDTO> tracks = new ArrayList<>();
 	private String artwork;
 
 //	public PlaylistDTO(long id, String name, String description, String artwork, List<Track> tracks) {
