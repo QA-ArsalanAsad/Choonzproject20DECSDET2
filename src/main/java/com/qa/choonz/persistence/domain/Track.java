@@ -2,12 +2,12 @@ package com.qa.choonz.persistence.domain;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
@@ -33,8 +33,8 @@ public class Track {
 	@ManyToOne
 	private Album album;
 
-	@ManyToMany(mappedBy = "tracks")
-	private List <Playlist> playlists;
+	@OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE)
+	private List<Playlist> playlists;
 
 	// in seconds
 	private int duration;
