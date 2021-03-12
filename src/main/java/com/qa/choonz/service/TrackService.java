@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.qa.choonz.exception.TrackNotFoundException;
 import com.qa.choonz.persistence.domain.Album;
-import com.qa.choonz.persistence.domain.Playlist;
 import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.persistence.repository.TrackRepository;
 import com.qa.choonz.rest.dto.TrackDTO;

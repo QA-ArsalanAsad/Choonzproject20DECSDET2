@@ -8,9 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.choonz.exception.PlaylistNotFoundException;
+import com.qa.choonz.exception.TrackNotFoundException;
 import com.qa.choonz.persistence.domain.Playlist;
+import com.qa.choonz.persistence.domain.Playlist_Track;
+import com.qa.choonz.persistence.domain.Track;
 import com.qa.choonz.persistence.domain.User;
 import com.qa.choonz.persistence.repository.PlaylistRepository;
+import com.qa.choonz.persistence.repository.Playlist_TrackRepository;
+import com.qa.choonz.persistence.repository.TrackRepository;
 import com.qa.choonz.rest.dto.PlaylistDTO;
 import com.qa.choonz.utils.BeanUtils;
 
@@ -21,6 +26,8 @@ import lombok.RequiredArgsConstructor;
 public class PlaylistService {
 
 	private final PlaylistRepository repo;
+	private final TrackRepository trackRepo;
+	private final Playlist_TrackRepository pTRepo;
 	private final ModelMapper mapper;
 
 	private PlaylistDTO mapToDTO(Playlist playlist) {
@@ -53,6 +60,23 @@ public class PlaylistService {
 		Playlist updated = this.repo.save(toUpdate);
 		return this.mapToDTO(updated);
 	}
+	
+	public PlaylistDTO addTrack(PlaylistDTO playlistDTO, long trackID) {
+		Playlist tmpPlaylist = this.mapFromDTO(playlistDTO);
+		Track tmpTrack = this.trackRepo.findById(trackID).orElseThrow(TrackNotFoundException::new);
+		Playlist_Track tmpPlaylist_Track = new Playlist_Track(tmpTrack, tmpPlaylist);
+		this.pTRepo.save(tmpPlaylist_Track);
+		Playlist returnMe = this.repo.findById(tmpPlaylist.getId()).orElseThrow(PlaylistNotFoundException::new);
+		return this.mapToDTO(returnMe);
+	}
+	
+//	public PlaylistDTO removeTrack(PlaylistDTO playlistDTO, long trackID) {
+//		Playlist tmpPlaylist = this.mapFromDTO(playlistDTO);
+//		Track tmpTrack = this.trackRepo.findById(trackID).orElseThrow(TrackNotFoundException::new);
+//		Playlist_Track tmpPlaylist_Track = new Playlist_Track(tmpTrack, tmpPlaylist);
+//		this.pTRepo.save(tmpPlaylist_Track);
+//		return this.mapToDTO(tmpPlaylist);
+//	}
 
 	public boolean delete(long id) {
 		this.repo.deleteById(id);
