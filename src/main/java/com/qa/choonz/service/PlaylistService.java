@@ -70,13 +70,12 @@ public class PlaylistService {
 		return this.mapToDTO(returnMe);
 	}
 	
-//	public PlaylistDTO removeTrack(PlaylistDTO playlistDTO, long trackID) {
-//		Playlist tmpPlaylist = this.mapFromDTO(playlistDTO);
-//		Track tmpTrack = this.trackRepo.findById(trackID).orElseThrow(TrackNotFoundException::new);
-//		Playlist_Track tmpPlaylist_Track = new Playlist_Track(tmpTrack, tmpPlaylist);
-//		this.pTRepo.save(tmpPlaylist_Track);
-//		return this.mapToDTO(tmpPlaylist);
-//	}
+	public PlaylistDTO removeTrack(PlaylistDTO playlistDTO, long playlist_trackID) {
+		this.pTRepo.deleteById(playlist_trackID);
+		Playlist tmpPlaylist = this.mapFromDTO(playlistDTO);
+		Playlist returnMe = this.repo.findById(tmpPlaylist.getId()).orElseThrow(PlaylistNotFoundException::new);
+		return this.mapToDTO(returnMe);
+	}
 
 	public boolean delete(long id) {
 		this.repo.deleteById(id);
