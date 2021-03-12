@@ -33,8 +33,8 @@ public class Track {
 	@ManyToOne
 	private Album album;
 
-	@OneToMany(mappedBy = "track", cascade = CascadeType.REMOVE)
-	private List<Playlist> playlists;
+	@OneToMany(mappedBy = "track", cascade = CascadeType.ALL)
+	private List<Playlist_Track> playlists;
 
 	// in seconds
 	private int duration;
