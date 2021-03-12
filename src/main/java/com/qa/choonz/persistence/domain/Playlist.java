@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
@@ -41,7 +40,7 @@ public class Playlist {
 	@Column(unique = true)
 	private String artwork;
 
-	@ManyToMany
+	@OneToMany(mappedBy = "playlist",  cascade = CascadeType.REMOVE)
 	private List<Track> tracks;
 
 	@OneToOne
