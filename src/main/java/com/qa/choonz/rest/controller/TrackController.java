@@ -48,10 +48,10 @@ public class TrackController {
 		return new ResponseEntity<>(this.service.update(trackDTO, id), HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping("/update/{id}/{method}/{playlistID}")
-	public ResponseEntity<TrackDTO> update(@RequestBody TrackDTO trackDTO, @PathVariable long id, @PathVariable String method, @PathVariable long playlistID) {
-		return new ResponseEntity<>(this.service.update(trackDTO, id), HttpStatus.ACCEPTED);
-	}
+//	@PutMapping("/update/{id}/{method}/{playlistID}")
+//	public ResponseEntity<TrackDTO> update(@RequestBody TrackDTO trackDTO, @PathVariable long id, @PathVariable String method, @PathVariable long playlistID) {
+//		return new ResponseEntity<>(this.service.update(trackDTO, id), HttpStatus.ACCEPTED);
+//	}
 
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<TrackDTO> delete(@PathVariable long id) {

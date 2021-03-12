@@ -40,8 +40,8 @@ public class Playlist {
 	@Column(unique = true)
 	private String artwork;
 
-	@OneToMany(mappedBy = "playlist",  cascade = CascadeType.REMOVE)
-	private List<Track> tracks;
+	@OneToMany(mappedBy = "playlist",  cascade = CascadeType.ALL)
+	private List<Playlist_Track> tracks;
 
 	@OneToOne
 	private User user;

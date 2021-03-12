@@ -57,24 +57,24 @@ public class TrackService {
 		
 	}
 
-	public TrackDTO update(TrackDTO trackDTO, long id, String method, long playlistID) {
-
-		Track toUpdate = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
-		List<Playlist> tmpPlaylist = toUpdate.getPlaylists();
-		
-		if (method == "add") {
-			tmpPlaylist.add(new Playlist(playlistID));
-		} else if (method == "remove") {
-			tmpPlaylist.remove(new Playlist(playlistID));
-		}
-		
-		toUpdate.setPlaylists(tmpPlaylist);
-		
-		BeanUtils.mergeNotNull(mapFromDTO(trackDTO), toUpdate);
-		Track updated = this.repo.save(toUpdate);
-		return this.mapToDTO(updated);
-		
-	}
+//	public TrackDTO update(TrackDTO trackDTO, long id, String method, long playlistID) {
+//
+//		Track toUpdate = this.repo.findById(id).orElseThrow(TrackNotFoundException::new);
+//		List<Playlist> tmpPlaylist = toUpdate.getPlaylists();
+//		
+//		if (method == "add") {
+//			tmpPlaylist.add(new Playlist(playlistID));
+//		} else if (method == "remove") {
+//			tmpPlaylist.remove(new Playlist(playlistID));
+//		}
+//		
+//		toUpdate.setPlaylists(tmpPlaylist);
+//		
+//		BeanUtils.mergeNotNull(mapFromDTO(trackDTO), toUpdate);
+//		Track updated = this.repo.save(toUpdate);
+//		return this.mapToDTO(updated);
+//		
+//	}
 
 	public boolean delete(long id) {
 		this.repo.deleteById(id);
