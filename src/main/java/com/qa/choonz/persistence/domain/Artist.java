@@ -36,15 +36,24 @@ public class Artist {
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Album> albums;
 
+	
+	public Artist(Long id)
+	{
+
+		this.id = id;
+	}
+
 	public Artist(long id, @NotNull @Size(max = 100) String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
-	
-	public Artist(String name) {
+
+
+	public Artist(@NotNull @Size(max = 100) String name) {
 		super();
 		this.name = name;
+
 	}
 	
 	public Artist(long id) {

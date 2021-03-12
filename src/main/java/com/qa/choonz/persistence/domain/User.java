@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 public class User {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -28,9 +28,27 @@ public class User {
 	private String userName;
 	@NotNull
 	private String password;
-	
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Playlist> playlists;
+	private List<Playlist> playlists;
+
+	public User(Long id, @NotNull String userName, @NotNull String password) {
+		super();
+		this.id = id;
+		this.userName = userName;
+		this.password = password;
+	}
+
+	public User(@NotNull String userName, @NotNull String password) {
+		super();
+		this.userName = userName;
+		this.password = password;
+	}
+	
+	public User(Long id) {
+		super();
+		this.id = id;
+	}
 
 }

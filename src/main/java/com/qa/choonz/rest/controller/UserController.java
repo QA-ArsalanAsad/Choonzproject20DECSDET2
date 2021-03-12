@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,40 +19,42 @@ import com.qa.choonz.persistence.domain.User;
 import com.qa.choonz.rest.dto.UserDTO;
 import com.qa.choonz.service.UserService;
 
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping("/user")
 @CrossOrigin
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class UserController {
 
 	private UserService userService;
 
+	@Autowired
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
+
 	@PostMapping("/create")
 	public ResponseEntity<UserDTO> create(@RequestBody User user) {
-		return new ResponseEntity<UserDTO>(this.userService.create(user), HttpStatus.CREATED);
+		return new ResponseEntity<>(this.userService.create(user), HttpStatus.CREATED);
 	}
 
 	@GetMapping("/read")
 	public ResponseEntity<List<UserDTO>> readAll() {
-		return new ResponseEntity<List<UserDTO>>(this.userService.read(), HttpStatus.OK);
+		return ResponseEntity.ok(this.userService.read());
 	}
 
 	@GetMapping("/read/{id}")
 	public ResponseEntity<UserDTO> readById(@PathVariable long id) {
-		return new ResponseEntity<UserDTO>(this.userService.read(id), HttpStatus.OK);
+		return ResponseEntity.ok(this.userService.read(id));
 	}
 
-	@PostMapping("/update/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<UserDTO> update(@RequestBody User user, @PathVariable long id) {
-		return new ResponseEntity<UserDTO>(this.userService.update(user, id), HttpStatus.ACCEPTED);
+		return new ResponseEntity<>(this.userService.update(user, id), HttpStatus.ACCEPTED);
 	}
 
 	@DeleteMapping("delete/{id}")
 	public ResponseEntity<UserDTO> delete(@PathVariable long id) {
 		return this.userService.delete(id) ? new ResponseEntity<UserDTO>(HttpStatus.NO_CONTENT)
-				: new ResponseEntity<UserDTO>(HttpStatus.INTERNAL_SERVER_ERROR);
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
 }

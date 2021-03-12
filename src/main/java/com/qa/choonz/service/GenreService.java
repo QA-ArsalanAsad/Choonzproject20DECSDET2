@@ -11,6 +11,7 @@ import com.qa.choonz.exception.GenreNotFoundException;
 import com.qa.choonz.persistence.domain.Genre;
 import com.qa.choonz.persistence.repository.GenreRepository;
 import com.qa.choonz.rest.dto.GenreDTO;
+import com.qa.choonz.utils.BeanUtils;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,8 +19,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class GenreService {
 
-    private GenreRepository repo;
-    private ModelMapper mapper;
+    private final GenreRepository repo;
+    private final  ModelMapper mapper;
     
     private GenreDTO mapToDTO(Genre genre) {
         return this.mapper.map(genre, GenreDTO.class);
@@ -40,9 +41,19 @@ public class GenreService {
     }
 
     public GenreDTO update(Genre genre, long id) {
-        Genre toUpdate = this.repo.findById(id).orElseThrow(GenreNotFoundException::new);
+		
+    	Genre toUpdate = this.repo.findById(id).orElseThrow(GenreNotFoundException::new);
+        toUpdate.setName(genre.getName());
+        BeanUtils.mergeNotNull(genre, toUpdate);
         Genre updated = this.repo.save(toUpdate);
         return this.mapToDTO(updated);
+    	
+        //Old Update Method \\
+    	/*
+		 * Genre toUpdate =
+		 * this.repo.findById(id).orElseThrow(GenreNotFoundException::new); Genre
+		 * updated = this.repo.save(toUpdate); return this.mapToDTO(updated);
+		 */
     }
 
     public boolean delete(long id) {
