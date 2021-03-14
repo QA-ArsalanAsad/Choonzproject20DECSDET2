@@ -1,8 +1,11 @@
 package com.qa.choonz.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -33,7 +36,6 @@ public class GenreServiceMockUnitTest {
 
 	private static final ModelMapper testMapper = new ModelMapper();
 
-	// private final List<ToDoList> fullLists = List.of(testToDoList);
 
 	private GenreDTO mapToDTO(Genre genres) {
 		return GenreServiceMockUnitTest.testMapper.map(genres, GenreDTO.class);
@@ -58,5 +60,36 @@ public class GenreServiceMockUnitTest {
 		Mockito.verify(this.genreRepo, Mockito.times(1)).save(testGenre);
 	}
 
+	
+	@Test
+	public void readAllTest() {
+
+		List<GenreDTO> testReadGenreList = fullGenres.stream().map(this::mapToDTO).collect(Collectors.toList());
+
+		when(this.genreService.read()).thenReturn(testReadGenreList);
+		List<GenreDTO> result = testReadGenreList;
+		List<Genre> expected = this.genreRepo.findAll();
+		assertEquals(expected, result);
+
+		Mockito.verify(this.genreRepo, Mockito.times(1)).findAll();
+	}
+	
+	@Test
+	public void readByIDTest()
+	{
+		Long testID = 2L;
+
+		testGenreDTO = mapToDTO(testGenre);
+
+		Optional<Genre> list = Optional.of(this.testGenre);
+		Mockito.when(this.genreRepo.findById(testID)).thenReturn(list);
+		Mockito.when(mockMapper.map(testGenre, GenreDTO.class)).thenReturn(testGenreDTO);
+		GenreDTO result = this.genreService.read(testID);
+
+		assertEquals(testGenreDTO, result);
+
+		Mockito.verify(this.genreRepo, Mockito.times(1)).findById(testID);
+		
+	}
 
 }
