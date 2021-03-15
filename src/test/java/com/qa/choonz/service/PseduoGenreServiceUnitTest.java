@@ -19,33 +19,18 @@ import com.qa.choonz.rest.dto.GenreDTO;
 @SpringBootTest
 public class PseduoGenreServiceUnitTest {
 	
-	@MockBean
-	private GenreRepository genreRepo;
-	@MockBean
-	private ModelMapper mockMapper;
-
-	@Autowired
-	private GenreService genreService;
-
-	private final Genre testGenre = new Genre(2L, "Hip Hop", "A cool description", null);
-	private final List<Genre> fullGenres = List.of(testGenre);
-	private GenreDTO testGenreDTO;
-
-	private static final ModelMapper testMapper = new ModelMapper();
-
-	// private final List<ToDoList> fullLists = List.of(testToDoList);
-
-	private GenreDTO mapToDTO(Genre genres) {
-		return PseduoGenreServiceUnitTest.testMapper.map(genres, GenreDTO.class);
-	}
 
 	@Test
 	public void createTest() {
 
-		//We
+		//RESOURCES
 //		GenreDTO testDTO = mapToDTO();
-//
+		//Creat a new GenreDTO object and pefrom the mapTODTO method of a genre
+
+		//ACTIONS
+		
 //		Mockito.when(genreRepo.save()).thenReturn();
+		//Perform the save operation of the genre object then return the genre object
 //		
 //		Mockito.when(mockMapper.map(testGenre, GenreDTO.class)).thenReturn();
 //		

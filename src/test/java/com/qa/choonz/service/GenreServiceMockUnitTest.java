@@ -19,6 +19,7 @@ import com.qa.choonz.persistence.repository.GenreRepository;
 import com.qa.choonz.rest.dto.GenreDTO;
 
 
+
 @SpringBootTest
 public class GenreServiceMockUnitTest {
 	
@@ -91,5 +92,33 @@ public class GenreServiceMockUnitTest {
 		Mockito.verify(this.genreRepo, Mockito.times(1)).findById(testID);
 		
 	}
+	
+	@Test
+	public void updateTest()
+	{
+		
+	}
+	
+//	@Test
+//	public void deleteTest() {
+//		Long testID = 2L;
+//
+//		testGenreDTO = this.mapToDTO(testGenre);
+//		
+//		GenreRepository delete = Mockito.mock(GenreRepository.class);
+//		
+//		Mockito.doNothing().when(delete).deleteById(testID);
+//		delete.deleteById(testID);
+//		Mockito.when(!this.genreRepo.existsById(testID)).thenReturn(true);
+//		
+//		boolean result = this.genreService.delete(testID);
+//		boolean expected; // = !this.genreRepo.existsById(testID);
+//		
+//		
+//		assertEquals(expected, result);
+//
+//		Mockito.verify(this.genreRepo, Mockito.times(1)).existsById(testID);
+//	}
+//	
 
 }
