@@ -48,22 +48,22 @@
                             <nav id="" class="small">
                                 <ul class="list-unstyled">
                                     <li class="pb-3">
-                                        <a>
+                                        <a href="#">
                                            this is a long link to test width 
                                         </a>
                                     </li>
                                     <li class="pb-3">
-                                        <a>
+                                        <a href="#">
                                            this is another one
                                         </a>
                                     </li>
                                     <li class="pb-3">
-                                        <a>
+                                        <a href="#">
                                             foo
                                         </a>
                                     </li>
                                     <li class="pb-3">
-                                        <a>
+                                        <a href="#">
                                            bar
                                         </a>
                                     </li>
@@ -73,12 +73,63 @@
                     </div>
 
                     <!-- CONTENT -->
-                    <div class="choonz-content bg-body flex-grow">
+                    <div class="flex-grow-1">
                         <section id="content">
                             <h2 id="pageName">
                                 HOME
                             </h2>
-                            <article>
+                            <article class="">
+
+                                <form id="createArtistForm" class="mb-3">
+                                    <h3>Create Artist</h3>
+                                    <input type="text" class="form-control input-lg mb-3" id="createArtistName" placeholder="artist name">
+                                    <button type="submit" class="btn btn-primary" id="createArtistSubmit">Submit</button>
+                                </form>
+
+                            </article>   
+                            <article class="">
+                                
+                                <form id="createGenreForm" class="mb-3">
+                                    <h3>Create Genre</h3>
+                                    <input type="text" class="form-control input-lg mb-3" id="createGenreName" placeholder="genre name">
+                                    <input type="text" class="form-control input-lg mb-3" id="createGenreDescription" placeholder="genre decription">
+                                    <button type="submit" class="btn btn-primary" id="createGenreSubmit">Submit</button>
+                                </form>
+
+                            </article>  
+                            <article class="">
+                                
+                                <form id="createAlbumForm" class="mb-3">
+                                    <h3>Create Album</h3>
+                                    <input type="text" class="form-control input-lg mb-3" id="createAlbumName" placeholder="album name">
+                                    <input type="text" class="form-control input-lg mb-3" id="createAlbumArtist" placeholder="artist id">
+                                    <input type="text" class="form-control input-lg mb-3" id="createAlbumDescription" placeholder="album decription">
+                                    <input type="text" class="form-control input-lg mb-3" id="createAlbumCover" placeholder="link to album cover">
+                                    <button type="submit" class="btn btn-primary" id="createAlbumSubmit">Submit</button>
+                                </form>
+
+                            </article>  
+                            <article class="">
+                                
+                                <form id="createPlaylistForm" class="mb-3">
+                                    <h3>Create Playlist</h3>
+                                    <input type="text" class="form-control input-lg mb-3" id="createPlaylistName" placeholder="playlist name">
+                                    <input type="text" class="form-control input-lg mb-3" id="createPlaylistDescription" placeholder="playlist decription">
+                                    <input type="text" class="form-control input-lg mb-3" id="createPlaylistArtwork" placeholder="link to playlist art">
+                                    <button type="submit" class="btn btn-primary" id="createPlaylistSubmit">Submit</button>
+                                </form>
+
+                            </article>
+                            <article class="">
+                                
+                                <form id="createTrackForm" class="mb-2">
+                                    <h3>Create Track</h3>
+                                    <input type="text" class="form-control input-lg mb-3" id="createTracktName" placeholder="track name">
+                                    <input type="text" class="form-control input-lg mb-3" id="createTrackArtist" placeholder="artist id">
+                                    <input type="text" class="form-control input-lg mb-3" id="createTrackDuration" placeholder="track duration">
+                                    <input type="text" class="form-control input-lg mb-3" id="createTrackLyrics" placeholder="track lyrics">
+                                    <button type="submit" class="btn btn-primary" id="createTrackSubmit">Submit</button>
+                                </form>
 
                             </article>
                         </section>
