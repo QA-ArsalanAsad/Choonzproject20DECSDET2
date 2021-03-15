@@ -1,0 +1,81 @@
+.logo-resize {
+    height: 90%;
+    width: 90%;
+    object-fit: cover;
+}
+
+#searchbar-search {
+    font-size: xx-large;
+    font-family: Consolas;
+    color: white;
+}
+
+.regular-text {
+    font-family: Consolas;
+    color: white;
+}
+
+.centre-header {
+    font-size: xx-large;
+    font-family: Consolas;
+    color: white;
+    text-align: center;
+}
+
+.centre-content {
+    display: block;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.text-one-line {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.button-as-link {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: Consolas;
+    color: #001eff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.confirm {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #2dc937;
+    cursor: pointer;
+}
+
+.cancel {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #cc3232;
+    cursor: pointer;
+}
+
+.full-size-table {
+    width: 100%;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #cc3232;
+    cursor: pointer;
+}
+
+.update-button {
+    background: none;
+    border: none;
+    padding: 0;
+    color: #FDB600;
+    cursor: pointer;
+}

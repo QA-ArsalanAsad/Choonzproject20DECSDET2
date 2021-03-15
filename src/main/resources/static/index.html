@@ -3,52 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link href="/css/style.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <title>Choonz Music</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/choonz.css">
+    <title>Choonz Music Service</title>
 </head>
-
-<body>
-<!-- Navbar -->
-
-<nav class="navbar fixed-top navbar-expand-lg bg-light navbar-light">
-    <a class="navbar-brand" href="./">
-    <img class="logo" src="../img/Choonz.jpg" width="auto" ml-auto height="50"></a>
-    <button class="navbar-toggler collapsed border-0" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-        <span class="navbar-toggler-icon"></span>
-        <div class="close-icon py-1">✖</div>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsingNavbar">
-        <ul class="nav navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" href="/tracks">Featured Tracks</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/artists">Artists</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/playlists">Top Playlists</a>
-            </li>
-        </ul>
+<body class="bg-dark">
+<div class="container-fluid">
+    <div class="row">
+        <nav class="navbar navbar-expand navbar-dark bg-dark my-2">
+            <div class="col-2">
+                <a class="navbar-brand me-3 pe-3" href="index.html">
+                    <img class="logo-resize" src="img/ChoonzInverted.png" alt="Choonz Logo">
+                </a>
+            </div>
+            <div class="col-8">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-auto">
+                            <p id="searchbar-search" class="me-0">
+                                Search For:
+                            </p>
+                        </div>
+                        <div class="col-2 centre-content">
+                            <select class="form-select mb-2" id="select-bar" aria-label="Search Term">
+                                <option selected>Track</option>
+                                <option>Genre</option>
+                                <option>Album</option>
+                                <option>Artist</option>
+                                <option>Playlist</option>
+                            </select>
+                        </div>
+                        <div class="col-6 centre-content">
+                            <input type="search" id="input-bar" class="form-control mb-2">
+                        </div>
+                        <div class="col-1 centre-content">
+                            <button type="submit" id="search-button" class="btn btn-secondary mb-2">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-white bg-secondary rounded mb-2" href="#"
+                       id="account-settings"
+                       role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account Settings
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="account-settings">
+                        <li><a class="dropdown-item" href="./account-management/login.html">Login</a></li>
+                        <li><a class="dropdown-item" href="./account-management/registration.html">Register</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
     </div>
-</nav>
-<!-- /Navbar -->
-
-<!-- Search -->
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg mt-5">
-                <form class="form-inline d-flex justify-content-center md-form form-sm">
-                    <input class="form-control form-control-sm mr-1 w-75" type="text" placeholder="Search for music..." aria-label="Search">
-                    <button type="submit" id="Search"> Search </button>
-                </form>
+    <div class="row">
+        <div class="container mx-0 container-max-with">
+            <div class="row">
+                <div class="col-2" id="left-col">
+                    <p class="regular-text">My Playlists</p>
+                    <p class="regular-text">Not Logged In</p>
+                    <p class="regular-text">PLACEHOLDER NEED TO CHECK IF ACTUALLY LOGGED IN
+                        COULD USE LOCAL-STORAGE</p>
+                </div>
+                <div class="col-8" id="centre-col">
+                </div>
+                <div class="col-2" id="right-col">
+                    <p class="regular-text">Recent History</p>
+                    <p class="regular-text">TO IMPLEMENT</p>
+                </div>
             </div>
         </div>
     </div>
-
-<!-- /Search -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+</div>
+<script src="js/bootstrap.bundle.js"></script>
+<script src="js/home-page.js" type="module"></script>
 </body>
 </html>
