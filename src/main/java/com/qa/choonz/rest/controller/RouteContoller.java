@@ -1,9 +1,11 @@
 package com.qa.choonz.rest.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
+@CrossOrigin
 public class RouteContoller {
     @GetMapping(value = "/")
     public String index() {

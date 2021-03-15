@@ -1,4 +1,4 @@
-import {passwordToHash} from './utils.js';
+import {passwordToHash} from '../utils.js';
 
 let login = () => {
     let username = document.querySelector('#username-input');
@@ -9,11 +9,11 @@ let login = () => {
 
     passwordToHash(passwordValue)
         .then((passwordHash) => {
-            let bodyObj = {'username': usernameValue, 'password': passwordHash};
+            let bodyObj = {'userName': usernameValue, 'password': passwordHash};
             return bodyObj
         })
         .then((body) => {
-            fetch('http://localhost:8082/users/login', {
+            fetch('http://localhost:8082/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
