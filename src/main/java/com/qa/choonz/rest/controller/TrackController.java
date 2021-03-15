@@ -48,7 +48,7 @@ public class TrackController {
 		return new ResponseEntity<>(this.service.update(trackDTO, id), HttpStatus.ACCEPTED);
 	}
 
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<TrackDTO> delete(@PathVariable long id) {
 		return this.service.delete(id) ? new ResponseEntity<TrackDTO>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

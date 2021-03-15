@@ -1,8 +1,10 @@
 package com.qa.choonz.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.qa.choonz.utils.Token;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +55,20 @@ public class UserService {
 	public boolean delete(long id) {
 		this.repo.deleteById(id);
 		return !this.repo.existsById(id);
+	}
+
+	public HashMap<String, String> login(User user) {
+		User actual = this.repo.userLogin(user.getUserName());
+		Boolean isSuccessful = actual.getUserName().equals(user.getUserName()) && actual.getPassword().equals(user.getPassword());
+		String authToken = "";
+		if (isSuccessful) {
+			authToken = Token.generateToken(user);
+			this.repo.insertAuth(authToken, user.getUserName());
+		}
+		HashMap<String, String> returnHashMap = new HashMap<>();
+		returnHashMap.put("successful", isSuccessful.toString());
+		returnHashMap.put("auth", authToken);
+		return returnHashMap;
 	}
 
 }

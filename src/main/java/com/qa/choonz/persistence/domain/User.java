@@ -29,6 +29,8 @@ public class User {
 	@NotNull
 	private String password;
 
+	private String auth;
+
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	private List<Playlist> playlists;

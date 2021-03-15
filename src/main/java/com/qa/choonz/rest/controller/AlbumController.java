@@ -55,7 +55,7 @@ public class AlbumController {
 		return new ResponseEntity<>(this.service.update(album, id), HttpStatus.ACCEPTED);
 	}
 
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<AlbumDTO> delete(@PathVariable long id) {
 		return this.service.delete(id) ? new ResponseEntity<AlbumDTO>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

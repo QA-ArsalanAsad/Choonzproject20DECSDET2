@@ -1,5 +1,6 @@
 package com.qa.choonz.rest.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +52,21 @@ public class UserController {
 		return new ResponseEntity<>(this.userService.update(user, id), HttpStatus.ACCEPTED);
 	}
 
-	@DeleteMapping("delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<UserDTO> delete(@PathVariable long id) {
 		return this.userService.delete(id) ? new ResponseEntity<UserDTO>(HttpStatus.NO_CONTENT)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
+
+	@PostMapping("/login")
+	public ResponseEntity<String> login(@RequestBody User user) {
+		HashMap<String, String> loginDetails = this.userService.login(user);
+		if (loginDetails.get("successful").equals("true")) {
+			return new ResponseEntity<>(loginDetails.get("auth"), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+	}
+
 
 }
