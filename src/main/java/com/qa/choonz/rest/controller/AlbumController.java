@@ -24,12 +24,15 @@ import com.qa.choonz.service.AlbumService;
 @CrossOrigin
 public class AlbumController {
 
+
 	private AlbumService service;
+
 
 	@Autowired
 	public AlbumController(AlbumService service) {
 		this.service = service;
 	}
+
 
 	@PostMapping("/create/{artistID}/{genreID}")
 	public ResponseEntity<AlbumDTO> create(@RequestBody AlbumDTO albumDTO, @PathVariable Long artistID,
