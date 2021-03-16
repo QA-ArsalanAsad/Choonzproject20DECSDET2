@@ -21,35 +21,17 @@ public class AlbumUnitTest {
 	@BeforeEach
 	void init() {
 		this.tracks = new ArrayList<Track>();
-		this.testAlbum = new Album(this.id, this.name, this.tracks, this.genre, cover);
+		this.testAlbum = new Album(this.id, this.name, this.tracks, Metallica, this.genre, cover);
 	}
 	
 	@Test
 	void testFirstConstructor() {
-		Album blackAlbum = new Album(this.id, this.name, this.tracks, this.genre, this.cover);
+		Album blackAlbum = new Album(this.id, this.name, this.tracks, Metallica, this.genre, this.cover);
 		assertTrue(blackAlbum instanceof Album);
 	}
 	
 	@Test
 	void testSecondConstructor() {
-		Album blackAlbum = new Album(this.name, this.tracks, this.genre, this.cover);
-		assertTrue(blackAlbum instanceof Album);
-	}
-	
-	@Test
-	void testThirdConstructor() {
-		Album blackAlbum = new Album(this.name);
-		assertTrue(blackAlbum instanceof Album);
-	}
-	
-	@Test
-	void testFourthConstructor() {
-		Album blackAlbum = new Album(this.name, this.cover);
-		assertTrue(blackAlbum instanceof Album);
-	}
-	
-	@Test
-	void testFifthConstructor() {
 		Album blackAlbum = new Album(this.id);
 		assertTrue(blackAlbum instanceof Album);
 	}
