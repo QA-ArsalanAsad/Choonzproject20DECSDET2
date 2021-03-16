@@ -42,5 +42,6 @@ private UserDTO testDTO;
 		assertTrue(testDTO instanceof UserDTO);
 		assertNotNull(testDTO);
 	}
+	
 
 }
