@@ -18,8 +18,8 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.qa.choonz.persistence.domain.Artist;
-import com.qa.choonz.rest.dto.ArtistDTO;
+import com.qa.choonz.persistence.domain.Genre;
+import com.qa.choonz.rest.dto.GenreDTO;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -27,7 +27,7 @@ import com.qa.choonz.rest.dto.ArtistDTO;
 @Sql(scripts = "classpath:test-drop-all.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(scripts = { "classpath:test-schema.sql",
 		"classpath:test-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class ArtistIntegrationControllerTest {
+public class GenreIntegrationControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -35,25 +35,25 @@ public class ArtistIntegrationControllerTest {
 	@Autowired
 	private ModelMapper mapper;
 
-	private ArtistDTO mapToDTO(Artist artist) {
-		return this.mapper.map(artist, ArtistDTO.class);
+	private GenreDTO mapToDTO(Genre genre) {
+		return this.mapper.map(genre, GenreDTO.class);
 	}
 
 	@Autowired
 	private ObjectMapper jsonifier;
 
-	private final String URI = "/artists";
-	private final Artist A_TEST_1 = new Artist(1L, "Kanye West");
+	private final String URI = "/genres";
 
 	@Test
 	void testCreate() throws Exception {
-		ArtistDTO testArtist = mapToDTO(new Artist("Drake"));
-		testArtist.setId(2L);
-		String artistToJSON = this.jsonifier.writeValueAsString(testArtist);
-		RequestBuilder rB = post(URI + "/create").contentType(MediaType.APPLICATION_JSON).content(artistToJSON)
+
+		GenreDTO testGenre = mapToDTO(new Genre("R&B", "Mix songs"));
+		testGenre.setId(2L);
+		String genreToJSON = this.jsonifier.writeValueAsString(testGenre);
+		RequestBuilder rB = post(URI + "/create").contentType(MediaType.APPLICATION_JSON).content(genreToJSON)
 				.accept(MediaType.APPLICATION_JSON);
 		ResultMatcher checkStatus = status().isCreated();
-		ResultMatcher checkBody = content().json(artistToJSON);
+		ResultMatcher checkBody = content().json(genreToJSON);
 		this.mvc.perform(rB).andExpect(checkStatus).andExpect(checkBody);
 
 	}
@@ -65,11 +65,6 @@ public class ArtistIntegrationControllerTest {
 
 	@Test
 	void testReadByID() throws Exception {
-
-//		RequestBuilder rB = get(URI + "/read/" + A_TEST_1.getId()).accept(MediaType.APPLICATION_JSON);
-//		ResultMatcher checkStatus = status().isOk();
-//		this.mvc.perform(rB).andExpect(checkStatus)
-//				.andExpect(content().json(this.jsonifier.writeValueAsString(this.mapToDTO(A_TEST_1))));
 
 	}
 
