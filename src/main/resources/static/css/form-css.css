@@ -1,0 +1,26 @@
+.input-header {
+    font-size: larger;
+    font-family: Consolas;
+    color: white;
+}
+
+.input-label {
+    font-size: medium;
+    font-family: Consolas;
+    color: white;
+}
+
+.dark-grey-shade-7 {
+    background-color: #616161;
+}
+
+.centre-button {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.failed-text {
+    font-size: large;
+    color: mediumblue;
+}

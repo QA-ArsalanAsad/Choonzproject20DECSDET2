@@ -24,10 +24,13 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@NotNull
 	private String userName;
 	@NotNull
 	private String password;
+
+	private String auth;
 
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	@OnDelete(action = OnDeleteAction.CASCADE)

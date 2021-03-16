@@ -33,6 +33,7 @@ public class Album {
 	@OneToMany(mappedBy = "album", cascade = CascadeType.ALL)
 	private List<Track> tracks;
 
+	@NotNull
 	@ManyToOne
 	private Artist artist;
 
