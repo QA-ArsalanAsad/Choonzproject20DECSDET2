@@ -9,7 +9,7 @@ export let passwordToHash = async (password) => {
 
 export let getUsernameFromAuth = async (authToken) => {
     let username;
-    fetch(`/user/read/auth/${authToken}`)
+    await fetch(`/user/read/auth/${authToken}`)
         .then((response) => {
             return response.json();
         }).then((responseData) => {
