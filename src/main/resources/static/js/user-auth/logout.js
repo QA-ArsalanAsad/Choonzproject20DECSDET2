@@ -17,11 +17,10 @@ export let clearAuth = async () => {
     }).then((responseData)=>{
         success = responseData;
     })
-    // TODO fix logout bug
     if (success === 'false') {
         console.log('Successfully Logged Out!');
     } else {
-        console.log('Unsuccessful Logout Try Again!')
+        console.log('Unsuccessful Logout Try Again!');
     }
     sessionStorage.removeItem('auth');
     sessionStorage.setItem('justLoggedOut', 'true');
