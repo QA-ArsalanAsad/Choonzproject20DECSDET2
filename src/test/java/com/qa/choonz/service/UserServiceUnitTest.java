@@ -1,10 +1,12 @@
 package com.qa.choonz.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -146,6 +148,79 @@ public class UserServiceUnitTest {
 		assertEquals(false, result);
 		verify(this.repo, atLeastOnce()).deleteById(999L);
 		verify(this.repo, atLeastOnce()).existsById(999L);
+
+	}
+
+	@Test
+	void testLogin() throws Exception {
+		User testUser = new User(1L, "testUser1", "pass");
+
+		when(repo.userLogin("testUser1")).thenReturn(testUser);
+
+		HashMap<String, String> result = service.login(testUser);
+
+		assertNotNull(result);
+
+		verify(this.repo, atLeastOnce()).userLogin("testUser1");
+
+	}
+
+	@Test
+	void testLoginFail() throws Exception {
+		User testUser = new User(1L, "testUser1", "pass");
+		User testUserFail = new User(2L, "testUser1", "passF");
+		HashMap<String, String> returnHashMap = new HashMap<>();
+		returnHashMap.put("successful", "false");
+		returnHashMap.put("auth", "");
+
+		when(repo.userLogin("testUser1")).thenReturn(testUserFail);
+
+		HashMap<String, String> result = service.login(testUser);
+
+		assertEquals(returnHashMap, result);
+
+		verify(this.repo, atLeastOnce()).userLogin("testUser1");
+
+	}
+
+	@Test
+	void testLogout() throws Exception {
+		User testUser = new User(1L, "testUser1", "pass");
+		testUser.setAuth("");
+		when(repo.searchByAuth("token")).thenReturn(testUser);
+		when(repo.userLogin("testUser1")).thenReturn(testUser);
+
+		Boolean result = service.logout("token");
+
+		assertEquals(true, result);
+
+	}
+
+	@Test
+	void testLogoutFail() throws Exception {
+		User testUser = new User(1L, "testUser1", "pass");
+		testUser.setAuth("token");
+		when(repo.searchByAuth("token")).thenReturn(testUser);
+		when(repo.userLogin("testUser1")).thenReturn(testUser);
+
+		Boolean result = service.logout("token");
+
+		assertEquals(false, result);
+
+	}
+
+	@Test
+	void testFindByAuth() throws Exception {
+		User testUser = new User(1L, "testUser1", "pass");
+		UserDTO testUserDto = mapToDTO(testUser);
+
+		when(repo.searchByAuth("token")).thenReturn(testUser);
+
+		UserDTO result = service.findByAuth("token");
+
+		assertEquals(testUserDto, result);
+
+		verify(this.repo, atLeastOnce()).searchByAuth("token");
 
 	}
 
