@@ -5,9 +5,13 @@ let accountManagementDropdown = document.querySelector('#account-management');
 export let populateMenu =(loggedIn)=>{
     if (loggedIn) {
         let logout = document.createElement('button');
-        logout.className = 'dropdown-item button-as-link-default';
+        logout.className = 'dropdown-item';
         logout.innerText = 'Logout';
         logout.addEventListener('click', ()=>{clearAuth()})
+
+        let item1 = document.createElement('li');
+        item1.append(logout);
+        accountManagementDropdown.append(item1);
     } else {
         let login = document.createElement('a');
         login.className = 'dropdown-item';
