@@ -79,3 +79,12 @@
     color: #FDB600;
     cursor: pointer;
 }
+
+.button-as-link-default {
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: Consolas;
+    text-decoration: underline;
+    cursor: pointer;
+}
