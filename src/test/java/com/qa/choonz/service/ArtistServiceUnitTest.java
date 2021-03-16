@@ -1,5 +1,13 @@
 package com.qa.choonz.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,79 +32,121 @@ public class ArtistServiceUnitTest {
 	private ArtistDTO mapToDTO(Artist artist) {
 		return this.mapper.map(artist, ArtistDTO.class);
 	}
+
+	private ArtistDTO mapToDTO2(List<ArtistDTO> list) {
+		return this.mapper.map(list, ArtistDTO.class);
+	}
+
+	private ArtistDTO mapToDTO3(List<Artist> listArtist2) {
+		return this.mapper.map(listArtist2, ArtistDTO.class);
+	}
+
 // I have labelled some variables here just in case we may be needing them later on
-//	private final Artist A_TEST_1 = new Artist("Giveon");
-//	private final Artist A_TEST_2 = new Artist("Drake");
+	private final Artist A_TEST_1 = new Artist(1L, "Giveon");
+	private final Artist A_TEST_2 = new Artist(1L, "Drake");
 //	private final Artist A_TEST_1N = new Artist("Nelly");
 //	private final Artist A_TEST_1U = new Artist(1L, A_TEST_1N.getName());
-//	private final List<Artist> listArtist = List.of(A_TEST_1, A_TEST_2);
+	private final List<Artist> listArtist = List.of(A_TEST_1, A_TEST_2);
 
 	@Test
 	void testCreate() throws Exception {
 		// GIVEN
-		// we create some variables either in the method or above as a variable
+		ArtistDTO testArtistDto = mapToDTO(A_TEST_1);
+
 		// AND
-		// repo.save our variable and then we return our new created variable
+		when(repo.save(A_TEST_1)).thenReturn(A_TEST_1);
+		when(mapper.map(A_TEST_1, ArtistDTO.class)).thenReturn(testArtistDto);
+
 		// WHEN
-		// assert that our expected value is equal to our result with a created Artist
+		ArtistDTO result = service.create(A_TEST_1);
+		assertEquals(testArtistDto, result);
+
 		// THEN
-		// verify that the testCreate method has ran at least once
+		verify(this.repo, atLeastOnce()).save(A_TEST_1);
+		verify(this.mapper, atLeastOnce()).map(A_TEST_1, ArtistDTO.class);
 
 	}
 
 	@Test
 	void testReadAll() throws Exception {
 		// GIVEN
-		// we create some variables either in this method or above as a private value
+
 		// AND
-		// repo.findAll of our variables and we return all our Artists
+		when(repo.findAll()).thenReturn(listArtist);
+
 		// WHEN
-		// assert that the expected value is equal to our actual result
+		ArtistDTO result = mapToDTO2(service.read());
+		assertEquals(mapToDTO3(listArtist), result);
+
 		// THEN
-		// verify that the readAll test has ran at least once
+		verify(this.repo, atLeastOnce()).findAll();
 	}
 
 	@Test
 	void testReadByID() throws Exception {
 		// GIVEN
-		// we have created our variables similarly
+		Optional<Artist> testArtist = Optional.of(A_TEST_1);
+		ArtistDTO testArtistDto = mapToDTO(A_TEST_1);
+
 		// AND
-		// we have created a variable of Long id
-		// AND
-		// we input repo.findByID and we return an Artist with that specified id
+		when(repo.findById(1L)).thenReturn(testArtist);
+		when(mapper.map(A_TEST_1, ArtistDTO.class)).thenReturn(testArtistDto);
+
 		// WHEN
-		// assert that the expected value is equal to our actual result
+		ArtistDTO result = service.read(A_TEST_1.getId());
+		assertEquals(testArtistDto, result);
+		assertEquals(true, testArtist.isPresent());
+
 		// THEN
-		// verify that the readByID test has ran at least once
+		verify(this.repo, atLeastOnce()).findById(A_TEST_1.getId());
+		verify(this.mapper, atLeastOnce()).map(A_TEST_1, ArtistDTO.class);
+
 	}
 
 	@Test
 	void testUpdate() throws Exception {
 		// GIVEN
-		// we can create a variable of Long with an id
+		Artist testArtist = new Artist(1L, "Giveon Updated");
+		ArtistDTO testArtistDto = mapToDTO(A_TEST_1);
+		Optional<Artist> testArtistOp = Optional.of(A_TEST_1);
+
 		// AND
-		// we input repo.findByID and return an optional.of one of our variables with
-		// the same id
-		// AND
-		// we input repo.save and return the expected updated variable which has been
-		// created
+		when(repo.findById(1L)).thenReturn(testArtistOp);
+		when(repo.save(testArtist)).thenReturn(testArtist);
+		when(mapper.map(A_TEST_1, ArtistDTO.class)).thenReturn(testArtistDto);
+
 		// WHEN
-		// assert that the expected value is equal to our actual result
+		ArtistDTO result = service.update(testArtist, 1L);
+		assertEquals(testArtistDto, result);
+		assertEquals(true, testArtistOp.isPresent());
+
 		// THEN
-		// verify that the update test has ran at least once
+		verify(this.repo, atLeastOnce()).save(testArtist);
+		verify(this.mapper, atLeastOnce()).map(testArtist, ArtistDTO.class);
+
 	}
 
 	@Test
 	void testDelete() throws Exception {
-		// GIVEN
-		// we can create a variable of Long with an ID
-		// AND
-		// we can input repo.existsByID and then return a value of fals (this needs to
-		// be checked)
-		// WHEN
-		// assert that the expected value is equal to true when the id is deleted
-		// THEN
-		// verify that the delete test has ran at least once
+
+		Boolean result = service.delete(1L);
+
+		assertEquals(true, result);
+		verify(this.repo, atLeastOnce()).deleteById(A_TEST_1.getId());
+
+	}
+
+	@Test
+	void testDeleteFalse() throws Exception {
+
+		when(repo.existsById(999L)).thenReturn(true);
+
+		Boolean result = service.delete(999L);
+
+		assertEquals(false, result);
+		verify(this.repo, atLeastOnce()).deleteById(999L);
+		verify(this.repo, atLeastOnce()).existsById(999L);
+
 	}
 
 }
