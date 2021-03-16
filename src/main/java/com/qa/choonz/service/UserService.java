@@ -71,4 +71,20 @@ public class UserService {
 		return returnHashMap;
 	}
 
+	// This function takes in an auth token, finds that user associated with
+	// that token, then wipes that token from the user (to signify logging out)
+	// it then finds that user by username (using the login function) and checks
+	// that the token is empty. If it is empty then the function returns true,
+	// if it finds a token it will return false
+	public Boolean logout(String authToken) {
+		String userName = this.repo.searchByAuth(authToken).getUserName();
+		this.repo.removeAuth(authToken);
+		User actual = this.repo.userLogin(userName);
+		 if (actual.getAuth().equals("")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

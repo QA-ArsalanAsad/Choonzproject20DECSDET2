@@ -1,4 +1,4 @@
-import {passwordToHash} from './utils.js';
+import {passwordToHash} from '../utils.js';
 
 let register =()=>{
     let username = document.querySelector('#username-input');
@@ -16,11 +16,11 @@ let register =()=>{
     else {
         passwordToHash(passwordValue)
             .then((passwordHash)=>{
-                const bodyObj = {'username': usernameValue, 'password': passwordHash};
+                const bodyObj = {'userName': usernameValue, 'password': passwordHash};
                 return bodyObj;
             })
             .then((body)=>{
-                fetch('http://localhost:8082/users/signup', {
+                fetch('http://localhost:8082/user/create', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

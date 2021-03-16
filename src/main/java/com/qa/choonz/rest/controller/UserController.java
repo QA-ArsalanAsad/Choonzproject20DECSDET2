@@ -68,5 +68,17 @@ public class UserController {
 		}
 	}
 
-
+	// This endpoint takes in a auth-token, and attempts to log it out
+	// if the logout succeeds then the auth-token is removed from the db
+	// and ("true", OK) are returned, on fail ("false", NOT_FOUND) are
+	// returned
+	@PostMapping("/logout/{authToken}")
+	public ResponseEntity<String> logout(@PathVariable String authToken) {
+		Boolean isSuccessful = this.userService.logout(authToken);
+		if (isSuccessful) {
+			return new ResponseEntity<>(isSuccessful.toString(), HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(isSuccessful.toString(), HttpStatus.NOT_FOUND);
+		}
+	}
 }
