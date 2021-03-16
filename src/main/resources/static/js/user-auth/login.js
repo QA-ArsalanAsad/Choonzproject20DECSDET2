@@ -28,10 +28,6 @@ let login = () => {
                     console.error("Unable to login (wrong credentials)");
                     updateFail("wrong-credentials");
                 } else if (response.status === 200) {
-                    let toastPopup = loginToast(usernameValue);
-                    let body = document.querySelector('body');
-                    body.append(toastPopup);
-                    enableToast();
                     successfulLogin = true;
                     let auth = response.text();
                     return auth;
@@ -44,6 +40,10 @@ let login = () => {
                 if (successfulLogin) {
                     sessionStorage.setItem('auth', JSON.stringify(auth));
                     window.location.replace('../index.html');
+                    let toastPopup = loginToast(usernameValue);
+                    let body = document.querySelector('body');
+                    body.append(toastPopup);
+                    enableToast();
                 }
             })
         })
@@ -72,33 +72,10 @@ let updateFail = (status) => {
     }
 }
 
-let loginToast = (name) => {
-
-    let toastDiv = document.createElement('div');
-    toastDiv.className = 'toast';
-    toastDiv.id = 'login-toast';
-    toastDiv.setAttribute('role', 'alert');
-    toastDiv.setAttribute('aria-live', 'assertive');
-    toastDiv.setAttribute('aria-atomic', 'true');
-
-    let toastHeader = document.createElement('div');
-    toastHeader.className = 'toast-header';
-    toastHeader.innerHTML = '<strong>Login</strong>' +
-        '    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>';
-
-    let toastBody = document.createElement('div');
-    toastBody.className = 'toast-body';
-    toastBody.innerHTML = `Hi ${name}, you have successfully logged in`;
-
-    toastDiv.append(toastHeader, toastBody);
-
-    return toastDiv;
-}
-
 let enableToast =()=>{
-    let toastElement = document.querySelector('.toast');
-    let toast = new Toast(toastElement);
-    toast.show();
+    $(document).ready(()=>{
+        $('#login-toast').toast('show');
+    })
 }
 
 let submitButton = document.querySelector('#submit-detail-button');
