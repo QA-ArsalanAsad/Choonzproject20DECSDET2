@@ -81,4 +81,10 @@ public class UserController {
 			return new ResponseEntity<>(isSuccessful.toString(), HttpStatus.NOT_FOUND);
 		}
 	}
+
+	@GetMapping("/read/auth/{authToken}")
+	public ResponseEntity<UserDTO> readByAuth(@PathVariable String authToken) {
+		UserDTO userDTO = this.userService.findByAuth(authToken);
+		return new ResponseEntity<>(userDTO, HttpStatus.ACCEPTED);
+	}
 }
