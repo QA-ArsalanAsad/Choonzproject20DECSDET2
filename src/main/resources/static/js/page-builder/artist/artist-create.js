@@ -34,7 +34,7 @@ let artistSubmit = () => {
         if (response.status === 201) {
             console.log('Artist Successfully Created');
         } else {
-            console.log('Error in creation')
+            console.log('Error In Creation')
         }
     }).finally(() => {
         document.querySelector('#artist-modal-name').value = '';
