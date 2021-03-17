@@ -1,4 +1,5 @@
 INSERT INTO ARTIST (NAME) VALUES ('Kanye West');
 INSERT INTO GENRE (NAME, DESCRIPTION) VALUES ('Hip Hop', 'test');
-INSERT INTO PLAYLIST (NAME, DESCRIPTION, ARTWORK) VALUES ('sad', 'when youre sad', 'unknown');
 INSERT INTO TRACK (NAME, DURATION, LYRICS) VALUES ('marvins room', 3, 'lyrics');
+INSERT INTO USER (USER_NAME, PASSWORD, AUTH) VALUES ('Nick', 'password', 'none');
+INSERT INTO PLAYLIST (NAME, DESCRIPTION, ARTWORK, USER_ID) VALUES ('sad', 'when youre sad', 'unknown', 1);

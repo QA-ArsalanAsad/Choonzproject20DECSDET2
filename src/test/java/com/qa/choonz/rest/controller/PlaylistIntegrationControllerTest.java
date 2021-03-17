@@ -19,7 +19,6 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.choonz.persistence.domain.Playlist;
-import com.qa.choonz.persistence.domain.User;
 import com.qa.choonz.rest.dto.PlaylistDTO;
 
 @SpringBootTest
@@ -28,7 +27,7 @@ import com.qa.choonz.rest.dto.PlaylistDTO;
 @Sql(scripts = "classpath:test-drop-all.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(scripts = { "classpath:test-schema.sql",
 		"classpath:test-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class PlaylistIntegrationController {
+public class PlaylistIntegrationControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -44,15 +43,16 @@ public class PlaylistIntegrationController {
 	private ObjectMapper jsonifier;
 
 	private final String URI = "/playlists";
-	private final User testUser = new User(1L);
+	private final long testUser = 1L;
 
 	@Test
 	void testCreate() throws Exception {
-		PlaylistDTO testPlaylist = mapToDTO(new Playlist("vibes", "for vibing", "unknown"));
-		testPlaylist.setId(2L);
+		Playlist testPl = new Playlist("vibes", "for vibing", "unknown");
+		testPl.setId(2L);
+		PlaylistDTO testPlaylist = mapToDTO(testPl);
 		String playlistToJSON = this.jsonifier.writeValueAsString(testPlaylist);
-		RequestBuilder rB = post(URI + "/create/" + 1).contentType(MediaType.APPLICATION_JSON).content(playlistToJSON)
-				.accept(MediaType.APPLICATION_JSON);
+		RequestBuilder rB = post(URI + "/create/" + testUser).contentType(MediaType.APPLICATION_JSON)
+				.content(playlistToJSON).accept(MediaType.APPLICATION_JSON);
 		ResultMatcher checkStatus = status().isCreated();
 		ResultMatcher checkBody = content().json(playlistToJSON);
 		this.mvc.perform(rB).andExpect(checkStatus).andExpect(checkBody);
