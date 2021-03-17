@@ -102,8 +102,10 @@ public class GenreControllerUnitMockTest {
 	@Test
 	public void testDelete() throws Exception {
 		when(this.genreService.delete(1L)).thenReturn(true);
+
 		assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT), (this.controller.delete(1L)));
 		assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), (this.controller.delete(99L)));
+
 		verify(this.genreService, atLeastOnce()).delete(1L);
 	}
 

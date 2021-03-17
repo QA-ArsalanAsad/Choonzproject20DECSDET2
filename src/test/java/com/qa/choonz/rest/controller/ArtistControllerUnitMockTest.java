@@ -44,41 +44,52 @@ public class ArtistControllerUnitMockTest {
 	@Test
 	public void testCreate() throws Exception {
 		when(this.service.create(testArtist)).thenReturn(this.mapToDTO(testArtist));
+
 		assertEquals(new ResponseEntity<ArtistDTO>(this.mapToDTO(testArtist), HttpStatus.CREATED),
 				(this.controller.create(testArtist)));
+
 		verify(this.service, atLeastOnce()).create(testArtist);
 	}
 
 	@Test
 	public void testReadAll() throws Exception {
 		when(this.service.read()).thenReturn(listOfArtist.stream().map(this::mapToDTO).collect(Collectors.toList()));
+
 		ResponseEntity<List<ArtistDTO>> expected = new ResponseEntity<List<ArtistDTO>>(
 				listOfArtist.stream().map(this::mapToDTO).collect(Collectors.toList()), HttpStatus.OK);
+
 		assertEquals((expected), (this.controller.read()));
+
 		verify(this.service, atLeastOnce()).read();
 	}
 
 	@Test
 	public void testReadByID() throws Exception {
 		when(this.service.read(1L)).thenReturn(this.mapToDTO(testArtist));
+
 		assertEquals(new ResponseEntity<ArtistDTO>(this.mapToDTO(testArtist), HttpStatus.OK),
 				(this.controller.read(1L)));
+
 		verify(this.service, atLeastOnce()).read(1L);
 	}
 
 	@Test
 	public void testUpdate() throws Exception {
 		when(this.service.update(testArtist, 1L)).thenReturn(this.mapToDTO(testArtist));
+
 		assertEquals(new ResponseEntity<ArtistDTO>(this.mapToDTO(testArtist), HttpStatus.ACCEPTED),
 				(this.controller.update(testArtist, 1L)));
+
 		verify(this.service, atLeastOnce()).update(testArtist, 1L);
 	}
 
 	@Test
 	public void testDelete() throws Exception {
 		when(this.service.delete(1L)).thenReturn(true);
+
 		assertEquals(new ResponseEntity<>(null, HttpStatus.NO_CONTENT), (this.controller.delete(1L)));
 		assertEquals(new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR), (this.controller.delete(99L)));
+
 		verify(this.service, atLeastOnce()).delete(1L);
 	}
 
