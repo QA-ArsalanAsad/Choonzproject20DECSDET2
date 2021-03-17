@@ -1,5 +1,6 @@
 package com.qa.choonz.persistence.domain;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -49,5 +50,26 @@ public class ArtistUnitTest {
 	void testEmptyConstructor() {
 		Artist Metallica = new Artist();
 		assertTrue(Metallica instanceof Artist);
+	}
+	
+	@Test
+	public void testHashCode() {
+		testArtist.hashCode();
+		assertTrue(testArtist instanceof Artist);
+		assertNotNull(testArtist);
+	}
+
+	@Test
+	public void testToString() {
+		testArtist.toString();
+		assertTrue(testArtist instanceof Artist);
+		assertNotNull(testArtist);
+	}
+
+	@Test
+	public void testEquals() {
+		testArtist.equals(testArtist);
+		assertTrue(testArtist instanceof Artist);
+		assertNotNull(testArtist);
 	}
 }

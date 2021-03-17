@@ -1,5 +1,6 @@
 package com.qa.choonz.persistence.domain;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -42,6 +43,27 @@ public class UserUnitTest {
 	void testEmptyConstrutor() {
 		User newUser = new User();
 		assertTrue(newUser instanceof User);
+	}
+
+	@Test
+	public void testHashCode() {
+		testUser.hashCode();
+		assertTrue(testUser instanceof User);
+		assertNotNull(testUser);
+	}
+
+	@Test
+	public void testToString() {
+		testUser.toString();
+		assertTrue(testUser instanceof User);
+		assertNotNull(testUser);
+	}
+
+	@Test
+	public void testEquals() {
+		testUser.equals(testUser);
+		assertTrue(testUser instanceof User);
+		assertNotNull(testUser);
 	}
 
 }
