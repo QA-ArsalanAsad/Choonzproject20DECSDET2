@@ -50,5 +50,4 @@ public class ArtistUnitTest {
 		Artist Metallica = new Artist();
 		assertTrue(Metallica instanceof Artist);
 	}
-
 }
