@@ -46,15 +46,17 @@ public class TrackIntegrationControllerTest {
 
 	@Test
 	void testCreate() throws Exception {
-		TrackDTO testTrack = mapToDTO(new Track("marvins room", 3, "lyrics"));
-		testTrack.setId(2L);
-		String trackToJSON = this.jsonifier.writeValueAsString(testTrack);
-		RequestBuilder rB = post(URI + "/create").contentType(MediaType.APPLICATION_JSON).content(trackToJSON)
-				.accept(MediaType.APPLICATION_JSON);
+		// RESOURCES
+		Track testDomain = new Track(1L, "marvins room", 3, "lyrics");
+		TrackDTO testDto = mapToDTO(testDomain);
+		testDto.setId(1L);
+		RequestBuilder request = post(URI + "/create/1").contentType(MediaType.APPLICATION_JSON)
+				.content(this.jsonifier.writeValueAsString(testDto));
+		// ASSERTIONS
 		ResultMatcher checkStatus = status().isCreated();
-		ResultMatcher checkBody = content().json(trackToJSON);
-		this.mvc.perform(rB).andExpect(checkStatus).andExpect(checkBody);
-
+		ResultMatcher checkBody = content().json(this.jsonifier.writeValueAsString(testDto));
+		// ACTION
+		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
 	}
 
 	@Test
