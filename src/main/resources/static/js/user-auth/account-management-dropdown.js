@@ -2,12 +2,12 @@ import {clearAuth} from "./logout.js";
 
 let accountManagementDropdown = document.querySelector('#account-management');
 
-export let populateMenu =(loggedIn)=>{
+export let populateMenu = async (loggedIn)=>{
     if (loggedIn) {
         let logout = document.createElement('button');
         logout.className = 'dropdown-item';
         logout.innerText = 'Logout';
-        logout.addEventListener('click', ()=>{clearAuth()})
+        logout.addEventListener('click', async ()=>{clearAuth()})
 
         let item1 = document.createElement('li');
         item1.append(logout);
