@@ -6,35 +6,33 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.qa.choonz.persistence.domain.Playlist_Track;
-
 public class Playlist_TrackDTOUnitTest {
 
-	private Playlist_Track testDTO;
+	private Playlist_TrackDTO testDTO;
 
 	@BeforeEach
 	public void beforeTest() {
-		testDTO = new Playlist_Track();
+		testDTO = new Playlist_TrackDTO();
 	}
 
 	@Test
 	public void testHashCode() {
 		testDTO.hashCode();
-		assertTrue(testDTO instanceof Playlist_Track);
+		assertTrue(testDTO instanceof Playlist_TrackDTO);
 		assertNotNull(testDTO);
 	}
 
 	@Test
 	public void testToString() {
 		testDTO.toString();
-		assertTrue(testDTO instanceof Playlist_Track);
+		assertTrue(testDTO instanceof Playlist_TrackDTO);
 		assertNotNull(testDTO);
 	}
 
 	@Test
 	public void testConstructor() {
-		testDTO = new Playlist_Track();
-		assertTrue(testDTO instanceof Playlist_Track);
+		testDTO = new Playlist_TrackDTO();
+		assertTrue(testDTO instanceof Playlist_TrackDTO);
 		assertNotNull(testDTO);
 	}
 
