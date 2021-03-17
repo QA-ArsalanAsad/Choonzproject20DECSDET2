@@ -29,7 +29,6 @@ public class Artist {
 
 	@NotNull
 	@Size(max = 100)
-	@Column(unique = true)
 	private String name;
 
 	@OneToMany(mappedBy = "artist", fetch = FetchType.EAGER)

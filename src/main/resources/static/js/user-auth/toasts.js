@@ -5,11 +5,7 @@ export let enableToast = async (state) =>{
         let authToken = sessionStorage.getItem('auth');
         authToken = authToken.replaceAll('"', '');
         let username;
-        await getUsernameFromAuth(authToken)
-            .then((response)=>{
-
-            });
-
+        await getUsernameFromAuth(authToken).then((response)=>{username = response})
         let toastBody = document.querySelector('.toast-body');
         toastBody.innerHTML = `Welcome back ${username}, you have successfully logged in`;
         let toastElement = document.querySelector('#login-toast');
