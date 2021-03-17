@@ -17,3 +17,16 @@ export let getUsernameFromAuth = async (authToken) => {
     })
     return username;
 }
+
+export let getAllTrackNames = async ()=>{
+    let allTrackNames = [];
+    await fetch('/tracks/read')
+        .then((response)=>{
+            return response.json();
+        }).then((responseData)=>{
+            for (let track in responseData) {
+                allTrackNames.push(responseData[track]['name']);
+            }
+        })
+    return allTrackNames;
+}

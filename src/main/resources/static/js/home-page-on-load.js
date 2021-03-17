@@ -3,6 +3,7 @@ import {enableToast} from './user-auth/toasts.js';
 import {getUsernameFromAuth} from './utils.js';
 import {artistPageBuild} from './page-builder/artist/artist-page-builder.js';
 import {genrePageBuild} from './page-builder.genre/genre-page-builder.js';
+import {playlistPageBuild} from './page-builder.playlist/playlist-page-builder.js';
 
 let auth = sessionStorage.getItem('auth');
 
@@ -41,6 +42,8 @@ let pageBuilder =(type)=>{
         artistPageBuild();
     } else if (type === 'Genre') {
         genrePageBuild();
+    } else if (type === 'Playlist') {
+        playlistPageBuild();
     }
 }
 let searchButton = document.querySelector('#search-button');
