@@ -24,25 +24,25 @@
                                 Search For:
                             </p>
                         </div>
-                        <div class="col-2 centre-content">
-                            <select class="form-select mb-2" id="select-bar" aria-label="Search Term">
-                                <option selected>Track</option>
-                                <option>Genre</option>
-                                <option>Album</option>
-                                <option>Artist</option>
-                                <option>Playlist</option>
-                            </select>
-                        </div>
-                        <div class="col-6 centre-content">
-                            <input type="search" id="input-bar" class="form-control mb-2">
-                        </div>
-                        <div class="col-1 centre-content">
-                            <button type="submit" id="search-button" class="btn btn-secondary mb-2">Search</button>
+                        <div class="col-9 centre-content">
+                            <div class="input-group">
+                                <span>
+                                <select class="form-select mb-2" id="select-bar" aria-label="Search Term">
+                                    <option selected>Artist</option>
+                                    <option>Genre</option>
+                                    <option>Playlist</option>
+                                    <option>Album</option>
+                                    <option>Track</option>
+                                </select>
+                                </span>
+                                <input type="search" id="input-bar" class="form-control mb-2">
+                                <button type="submit" id="search-button" class="btn btn-secondary mb-2">Search</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-auto ps-3">
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle text-white bg-secondary rounded mb-2" href="#"
                        id="account-settings"
@@ -59,27 +59,51 @@
         <div class="container mx-0 container-max-with">
             <div class="row">
                 <div class="col-2" id="left-col">
-                    <p class="regular-text">My Playlists</p>
-                    <p class="regular-text">Not Logged In</p>
-                    <p class="regular-text">PLACEHOLDER NEED TO CHECK IF ACTUALLY LOGGED IN
-                        COULD USE LOCAL-STORAGE</p>
+                    <p class="regular-text"><u>My Playlists</u></p>
+                    <p class="regular-text" id="welcome-user">Not Logged In</p>
                 </div>
                 <div class="col-8" id="centre-col">
                 </div>
                 <div class="col-2" id="right-col">
-                    <p class="regular-text">Recent History</p>
+                    <p class="regular-text"><u>Recent History</u></p>
                     <p class="regular-text">TO IMPLEMENT</p>
                 </div>
             </div>
         </div>
     </div>
-    <div class="toast" id="login-toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-header">
-            <strong>Choonz Login</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8"></div>
+        <div class="col-2">
+            <div class="toast" id="login-toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto" id="toast-header-text">Choonz Login</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast"
+                            aria-label="Close" style="float: right"></button>
+                </div>
+                <div class="toast-body">
+                </div>
+            </div>
         </div>
-        <div class="toast-body">
-            <p>Hi, you have successfully logged in!</p>
+    </div>
+</div>
+<!--Modals-->
+<div class="modal fade" id="artist-create-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create An Artist</h5>
+            </div>
+            <div class="modal-body">
+                <label for="artist-modal-name">Artist Name</label>
+                <input class="form-control mb-2" id="artist-modal-name" type="text">
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <button type="button" class="btn btn-warning me-auto" id="artist-modal-submit">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -39,11 +39,8 @@ let login = () => {
             }).then((auth) => {
                 if (successfulLogin) {
                     sessionStorage.setItem('auth', JSON.stringify(auth));
+                    sessionStorage.setItem('justLoggedIn', 'true');
                     window.location.replace('../index.html');
-                    let toastPopup = loginToast(usernameValue);
-                    let body = document.querySelector('body');
-                    body.append(toastPopup);
-                    enableToast();
                 }
             })
         })
@@ -70,12 +67,6 @@ let updateFail = (status) => {
     } else {
         failed.innerHTML = `Sorry failed to login (error code ${status})`
     }
-}
-
-let enableToast =()=>{
-    $(document).ready(()=>{
-        $('#login-toast').toast('show');
-    })
 }
 
 let submitButton = document.querySelector('#submit-detail-button');
