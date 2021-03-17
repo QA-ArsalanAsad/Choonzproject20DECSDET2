@@ -1,5 +1,6 @@
 package com.qa.choonz.persistence.domain;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
@@ -44,6 +45,55 @@ public class GenreUnitTest {
 	void testEmptyConstructor() {
 		Genre metal = new Genre();
 		assertTrue(metal instanceof Genre);
+	}
+
+	@Test
+	public void testHashCode() {
+		testGenre.hashCode();
+		assertTrue(testGenre instanceof Genre);
+		assertNotNull(testGenre);
+	}
+
+	@Test
+	public void testToString() {
+		testGenre.toString();
+		assertTrue(testGenre instanceof Genre);
+		assertNotNull(testGenre);
+	}
+
+	@Test
+	public void testEquals() {
+		Genre genre1 = new Genre(this.id, this.name, this.description, this.albums);
+		Genre genre2 = new Genre(this.id, this.name, this.description, this.albums);
+		assertTrue(genre1.equals(genre2));
+	}
+
+	@Test
+	public void testEquals2() {
+		Genre genre1 = new Genre(this.name, this.description);
+		Genre genre2 = new Genre(this.name, this.description);
+		assertTrue(genre1.equals(genre2));
+	}
+
+	@Test
+	public void testEquals3() {
+		Genre genre1 = new Genre(2L);
+		Genre genre2 = new Genre(2L);
+		assertTrue(genre1.equals(genre2));
+	}
+
+	@Test
+	public void testEquals4() {
+		Genre genre1 = new Genre();
+		Genre genre2 = new Genre();
+		assertTrue(genre1.equals(genre2));
+	}
+
+	@Test
+	public void testHashNew() {
+		Genre genre1 = new Genre();
+		Genre genre2 = new Genre();
+		assertTrue(genre1.hashCode() == genre2.hashCode());
 	}
 
 }
