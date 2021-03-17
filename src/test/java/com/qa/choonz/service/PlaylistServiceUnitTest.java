@@ -61,96 +61,77 @@ public class PlaylistServiceUnitTest {
 
 	@Test
 	void testCreate() throws Exception {
-		// GIVEN
 		A_TEST_1.setUser(new User(1L));
 		A_TEST_2.setUser(new User(1L));
 		PlaylistDTO testPlaylistDto = mapToDTO(A_TEST_1);
 
-		// AND
 		when(repo.save(A_TEST_1)).thenReturn(A_TEST_1);
 
-		// WHEN
 		PlaylistDTO result = service.create(testPlaylistDto, 1L);
 		assertEquals(testPlaylistDto, result);
 
-		// THEN
 		verify(this.repo, atLeastOnce()).save(A_TEST_1);
 
 	}
 
 	@Test
 	void testReadAll() throws Exception {
-		// GIVEN
-
-		// AND
 		when(repo.findAll()).thenReturn(listPlaylist);
 
-		// WHEN
 		PlaylistDTO result = mapToDTO2(service.read());
 		assertEquals(mapToDTO3(listPlaylist), result);
 
-		// THEN
 		verify(this.repo, atLeastOnce()).findAll();
 	}
 
 	@Test
 	void testReadByID() throws Exception {
-		// GIVEN
 		Optional<Playlist> testPlaylist = Optional.of(A_TEST_1);
 		PlaylistDTO testPlaylistDto = mapToDTO(A_TEST_1);
 
-		// AND
 		when(repo.findById(1L)).thenReturn(testPlaylist);
 
-		// WHEN
 		PlaylistDTO result = service.read(A_TEST_1.getId());
 		assertEquals(testPlaylistDto, result);
 		assertEquals(true, testPlaylist.isPresent());
 
-		// THEN
 		verify(this.repo, atLeastOnce()).findById(A_TEST_1.getId());
 
 	}
 
 	@Test
 	void testUpdate() throws Exception {
-		// GIVEN
 		Playlist testPlaylist = new Playlist(1L, "TestPlaylist1 Updated", "description", "artwork");
 		PlaylistDTO testPlaylistDto = mapToDTO(testPlaylist);
 		Optional<Playlist> testPlaylistOp = Optional.of(testPlaylist);
 
-		// AND
 		when(repo.findById(1L)).thenReturn(testPlaylistOp);
 		when(repo.save(testPlaylist)).thenReturn(testPlaylist);
 
-		// WHEN
 		PlaylistDTO result = service.update(testPlaylistDto, 1L);
 		assertEquals(testPlaylistDto, result);
 		assertEquals(true, testPlaylistOp.isPresent());
 
-		// THEN
 		verify(this.repo, atLeastOnce()).save(testPlaylist);
 
 	}
 
 	@Test
 	void testDelete() throws Exception {
-
 		Boolean result = service.delete(1L);
-
 		assertEquals(true, result);
+
 		verify(this.repo, atLeastOnce()).deleteById(A_TEST_1.getId());
 
 	}
 
 	@Test
 	void testDeleteFalse() throws Exception {
-
 		when(repo.existsById(999L)).thenReturn(true);
 
 		Boolean result = service.delete(999L);
-
 		assertEquals(false, result);
+
 		verify(this.repo, atLeastOnce()).deleteById(999L);
 		verify(this.repo, atLeastOnce()).existsById(999L);
 
@@ -164,13 +145,11 @@ public class PlaylistServiceUnitTest {
 		Optional<Playlist> testPlaylist = Optional.of(A_TEST_1);
 		Playlist_Track pTrack = new Playlist_Track(trackOne, A_TEST_1);
 
-		// A_TEST_1.setTracks(playlistTrack);
 		when(repo.findById(1L)).thenReturn(testPlaylist);
 		when(pTRepo.save(pTrack)).thenReturn(pTrack);
 		when(trackRepo.findById(1L)).thenReturn(testTrack);
 
 		PlaylistDTO result = service.addTrack(testPlaylistDto, 1L);
-
 		assertEquals(testPlaylistDto, result);
 
 		verify(this.repo, atLeastOnce()).findById(1L);
@@ -187,7 +166,6 @@ public class PlaylistServiceUnitTest {
 		when(repo.findById(1L)).thenReturn(testPlaylist);
 
 		PlaylistDTO result = service.removeTrack(testPlaylistDto, 1L);
-
 		assertEquals(testPlaylistDto, result);
 
 		verify(this.repo, atLeastOnce()).findById(1L);

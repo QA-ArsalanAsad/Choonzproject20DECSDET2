@@ -59,94 +59,75 @@ public class TrackServiceUnitTest {
 
 	@Test
 	void testCreate() throws Exception {
-		// GIVEN
 		TrackDTO testTrackDto = mapToDTO(A_TEST_1);
 
-		// AND
 		when(repo.save(A_TEST_1)).thenReturn(A_TEST_1);
 
-		// WHEN
 		TrackDTO result = service.create(testTrackDto, 1L);
 		assertEquals(testTrackDto, result);
 
-		// THEN
 		verify(this.repo, atLeastOnce()).save(A_TEST_1);
 
 	}
 
 	@Test
 	void testReadAll() throws Exception {
-		// GIVEN
-
-		// AND
 		when(repo.findAll()).thenReturn(listTrack);
 
-		// WHEN
 		TrackDTO result = mapToDTO2(service.read());
 		assertEquals(mapToDTO3(listTrack), result);
 
-		// THEN
 		verify(this.repo, atLeastOnce()).findAll();
 	}
 
 	@Test
 	void testReadByID() throws Exception {
-		// GIVEN
 		Optional<Track> testTrack = Optional.of(A_TEST_1);
 		TrackDTO testTrackDto = mapToDTO(A_TEST_1);
 
-		// AND
 		when(repo.findById(1L)).thenReturn(testTrack);
 
-		// WHEN
 		TrackDTO result = service.read(A_TEST_1.getId());
 		assertEquals(testTrackDto, result);
 		assertEquals(true, testTrack.isPresent());
 
-		// THEN
 		verify(this.repo, atLeastOnce()).findById(A_TEST_1.getId());
 
 	}
 
 	@Test
 	void testUpdate() throws Exception {
-		// GIVEN
 		Track testTrack = new Track(1L, "TestTrack1 Updated", 111, "Lyrics Updated");
 		TrackDTO testTrackDto = mapToDTO(testTrack);
 		Optional<Track> testTrackOp = Optional.of(testTrack);
 
-		// AND
 		when(repo.findById(1L)).thenReturn(testTrackOp);
 		when(repo.save(testTrack)).thenReturn(testTrack);
 
-		// WHEN
 		TrackDTO result = service.update(testTrackDto, 1L);
 		assertEquals(testTrackDto, result);
 		assertEquals(true, testTrackOp.isPresent());
 
-		// THEN
 		verify(this.repo, atLeastOnce()).save(testTrack);
 
 	}
 
 	@Test
 	void testDelete() throws Exception {
-
 		Boolean result = service.delete(1L);
-
 		assertEquals(true, result);
+
 		verify(this.repo, atLeastOnce()).deleteById(A_TEST_1.getId());
 
 	}
 
 	@Test
 	void testDeleteFalse() throws Exception {
-
 		when(repo.existsById(999L)).thenReturn(true);
 
 		Boolean result = service.delete(999L);
-
 		assertEquals(false, result);
+
 		verify(this.repo, atLeastOnce()).deleteById(999L);
 		verify(this.repo, atLeastOnce()).existsById(999L);
 

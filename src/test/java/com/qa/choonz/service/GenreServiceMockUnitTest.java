@@ -95,22 +95,18 @@ public class GenreServiceMockUnitTest {
 
 	@Test
 	void testUpdate() throws Exception {
-		// GIVEN
 		Genre testGenre2 = new Genre(2L, "Hip Hop Updated", "A cool description Updated", null);
 		GenreDTO testGenreDto = mapToDTO(testGenre);
 		Optional<Genre> testGenreOp = Optional.of(testGenre);
 
-		// AND
 		when(genreRepo.findById(2L)).thenReturn(testGenreOp);
 		when(genreRepo.save(testGenre2)).thenReturn(testGenre2);
 		when(mockMapper.map(testGenre, GenreDTO.class)).thenReturn(testGenreDto);
 
-		// WHEN
 		GenreDTO result = genreService.update(testGenre2, 2L);
 		assertEquals(testGenreDto, result);
 		assertEquals(true, testGenreOp.isPresent());
 
-		// THEN
 		verify(this.genreRepo, atLeastOnce()).save(testGenre2);
 		verify(this.mockMapper, atLeastOnce()).map(testGenre2, GenreDTO.class);
 
@@ -118,22 +114,22 @@ public class GenreServiceMockUnitTest {
 
 	@Test
 	void testDelete() throws Exception {
-
 		Boolean result = genreService.delete(2L);
 
 		assertEquals(true, result);
+
 		verify(this.genreRepo, atLeastOnce()).deleteById(testGenre.getId());
 
 	}
 
 	@Test
 	void testDeleteFalse() throws Exception {
-
 		when(genreRepo.existsById(999L)).thenReturn(true);
 
 		Boolean result = genreService.delete(999L);
 
 		assertEquals(false, result);
+
 		verify(this.genreRepo, atLeastOnce()).deleteById(999L);
 		verify(this.genreRepo, atLeastOnce()).existsById(999L);
 
