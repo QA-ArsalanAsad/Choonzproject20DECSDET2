@@ -87,4 +87,9 @@ public class UserService {
 		}
 	}
 
+	public UserDTO findByAuth(String authToken) {
+		User user = this.repo.searchByAuth(authToken);
+		return this.mapToDTO(user);
+	}
+
 }
