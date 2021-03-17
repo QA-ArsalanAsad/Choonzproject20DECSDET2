@@ -51,7 +51,7 @@ public class ArtistUnitTest {
 		Artist Metallica = new Artist();
 		assertTrue(Metallica instanceof Artist);
 	}
-	
+
 	@Test
 	public void testHashCode() {
 		testArtist.hashCode();
@@ -68,8 +68,37 @@ public class ArtistUnitTest {
 
 	@Test
 	public void testEquals() {
-		testArtist.equals(testArtist);
-		assertTrue(testArtist instanceof Artist);
-		assertNotNull(testArtist);
+		Artist artist1 = new Artist(2L, this.name);
+		Artist artist2 = new Artist(2L, this.name);
+		assertTrue(artist1.equals(artist2));
 	}
+
+	@Test
+	public void testEquals2() {
+		Artist artist1 = new Artist(this.name);
+		Artist artist2 = new Artist(this.name);
+		assertTrue(artist1.equals(artist2));
+	}
+
+	@Test
+	public void testEquals3() {
+		Artist artist1 = new Artist(2L);
+		Artist artist2 = new Artist(2L);
+		assertTrue(artist1.equals(artist2));
+	}
+
+	@Test
+	public void testEquals4() {
+		Artist artist1 = new Artist();
+		Artist artist2 = new Artist();
+		assertTrue(artist1.equals(artist2));
+	}
+
+	@Test
+	public void testHashNew() {
+		Artist artist1 = new Artist();
+		Artist artist2 = new Artist();
+		assertTrue(artist1.hashCode() == artist2.hashCode());
+	}
+
 }

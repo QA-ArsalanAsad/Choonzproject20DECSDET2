@@ -65,4 +65,31 @@ public class AlbumUnitTest {
 		assertNotNull(testAlbum);
 	}
 
+	@Test
+	public void testEqualsNew() {
+		Album album1 = new Album(this.id, this.name, this.tracks, Metallica, this.genre, cover);
+		Album album2 = new Album(this.id, this.name, this.tracks, Metallica, this.genre, cover);
+		assertTrue(album1.equals(album2));
+	}
+
+	@Test
+	public void testEqualsNew2() {
+		Album album1 = new Album(2L);
+		Album album2 = new Album(2L);
+		assertTrue(album1.equals(album2));
+	}
+
+	@Test
+	public void testEqualsNew3() {
+		Album album1 = new Album();
+		Album album2 = new Album();
+		assertTrue(album1.equals(album2));
+	}
+
+	@Test
+	public void testHashNew() {
+		Album album1 = new Album();
+		Album album2 = new Album();
+		assertTrue(album1.hashCode() == album2.hashCode());
+	}
 }

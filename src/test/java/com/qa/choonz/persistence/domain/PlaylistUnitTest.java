@@ -62,9 +62,37 @@ public class PlaylistUnitTest {
 
 	@Test
 	public void testEquals() {
-		testPlaylist.equals(testPlaylist);
-		assertTrue(testPlaylist instanceof Playlist);
-		assertNotNull(testPlaylist);
+		Playlist playlist1 = new Playlist(this.id, this.name, this.description, this.artwork);
+		Playlist playlist2 = new Playlist(this.id, this.name, this.description, this.artwork);
+		assertTrue(playlist1.equals(playlist2));
+	}
+
+	@Test
+	public void testEquals2() {
+		Playlist playlist1 = new Playlist(this.name, this.description, this.artwork);
+		Playlist playlist2 = new Playlist(this.name, this.description, this.artwork);
+		assertTrue(playlist1.equals(playlist2));
+	}
+
+	@Test
+	public void testEquals3() {
+		Playlist playlist1 = new Playlist(this.id);
+		Playlist playlist2 = new Playlist(this.id);
+		assertTrue(playlist1.equals(playlist2));
+	}
+
+	@Test
+	public void testEquals4() {
+		Playlist playlist1 = new Playlist();
+		Playlist playlist2 = new Playlist();
+		assertTrue(playlist1.equals(playlist2));
+	}
+
+	@Test
+	public void testHashNew() {
+		Playlist playlist1 = new Playlist();
+		Playlist playlist2 = new Playlist();
+		assertTrue(playlist1.hashCode() == playlist2.hashCode());
 	}
 
 }

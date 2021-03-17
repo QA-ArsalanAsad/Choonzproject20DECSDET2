@@ -38,9 +38,16 @@ private UserDTO testDTO;
 	
 	@Test
 	public void testEquals() {
-		testDTO.equals(testDTO);
-		assertTrue(testDTO instanceof UserDTO);
-		assertNotNull(testDTO);
+		UserDTO userdto1 = new UserDTO();
+		UserDTO userdto2 = new UserDTO();
+		assertTrue(userdto1.equals(userdto2));
+	}
+	
+	@Test
+	public void testHashNew() {
+		UserDTO userdto1 = new UserDTO();
+		UserDTO userdto2 = new UserDTO();
+		assertTrue(userdto1.hashCode() == userdto2.hashCode());
 	}
 	
 

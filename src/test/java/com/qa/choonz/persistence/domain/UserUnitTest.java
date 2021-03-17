@@ -61,9 +61,37 @@ public class UserUnitTest {
 
 	@Test
 	public void testEquals() {
-		testUser.equals(testUser);
-		assertTrue(testUser instanceof User);
-		assertNotNull(testUser);
+		User user1 = new User(this.id, this.userName, this.password);
+		User user2 = new User(this.id, this.userName, this.password);
+		assertTrue(user1.equals(user2));
+	}
+
+	@Test
+	public void testEquals2() {
+		User user1 = new User(this.userName, this.password);
+		User user2 = new User(this.userName, this.password);
+		assertTrue(user1.equals(user2));
+	}
+
+	@Test
+	public void testEquals3() {
+		User user1 = new User(this.id);
+		User user2 = new User(this.id);
+		assertTrue(user1.equals(user2));
+	}
+
+	@Test
+	public void testEquals4() {
+		User user1 = new User();
+		User user2 = new User();
+		assertTrue(user1.equals(user2));
+	}
+
+	@Test
+	public void testHashNew() {
+		User user1 = new User();
+		User user2 = new User();
+		assertTrue(user1.hashCode() == user2.hashCode());
 	}
 
 }

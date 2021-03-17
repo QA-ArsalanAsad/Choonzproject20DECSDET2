@@ -60,8 +60,37 @@ public class TrackUnitTest {
 
 	@Test
 	public void testEquals() {
-		testTrack.equals(testTrack);
-		assertTrue(testTrack instanceof Track);
-		assertNotNull(testTrack);
+		Track track1 = new Track(this.id, this.name, this.duration, this.lyrics);
+		Track track2 = new Track(this.id, this.name, this.duration, this.lyrics);
+		assertTrue(track1.equals(track2));
 	}
+
+	@Test
+	public void testEquals2() {
+		Track track1 = new Track(this.name, this.duration, this.lyrics);
+		Track track2 = new Track(this.name, this.duration, this.lyrics);
+		assertTrue(track1.equals(track2));
+	}
+
+	@Test
+	public void testEquals3() {
+		Track track1 = new Track(this.id);
+		Track track2 = new Track(this.id);
+		assertTrue(track1.equals(track2));
+	}
+
+	@Test
+	public void testEquals4() {
+		Track track1 = new Track();
+		Track track2 = new Track();
+		assertTrue(track1.equals(track2));
+	}
+
+	@Test
+	public void testHashNew() {
+		Track track1 = new Track();
+		Track track2 = new Track();
+		assertTrue(track1.hashCode() == track2.hashCode());
+	}
+
 }

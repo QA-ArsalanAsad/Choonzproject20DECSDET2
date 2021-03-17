@@ -35,7 +35,7 @@ public class Playlist_TrackUnitTest {
 		Playlist_Track newTrack = new Playlist_Track(this.id, this.track, this.playlist);
 		assertTrue(newTrack instanceof Playlist_Track);
 	}
-	
+
 	@Test
 	public void testHashCode() {
 		playlistTrack.hashCode();
@@ -52,9 +52,30 @@ public class Playlist_TrackUnitTest {
 
 	@Test
 	public void testEquals() {
-		playlistTrack.equals(playlistTrack);
-		assertTrue(playlistTrack instanceof Playlist_Track);
-		assertNotNull(playlistTrack);
+		Playlist_Track pt1 = new Playlist_Track(this.id, this.track, this.playlist);
+		Playlist_Track pt2 = new Playlist_Track(this.id, this.track, this.playlist);
+		assertTrue(pt1.equals(pt2));
+	}
+
+	@Test
+	public void testEquals2() {
+		Playlist_Track pt1 = new Playlist_Track(this.track, this.playlist);
+		Playlist_Track pt2 = new Playlist_Track(this.track, this.playlist);
+		assertTrue(pt1.equals(pt2));
+	}
+
+	@Test
+	public void testEquals3() {
+		Playlist_Track pt1 = new Playlist_Track();
+		Playlist_Track pt2 = new Playlist_Track();
+		assertTrue(pt1.equals(pt2));
+	}
+
+	@Test
+	public void testHashNew() {
+		Playlist_Track pt1 = new Playlist_Track();
+		Playlist_Track pt2 = new Playlist_Track();
+		assertTrue(pt1.hashCode() == pt2.hashCode());
 	}
 
 }
