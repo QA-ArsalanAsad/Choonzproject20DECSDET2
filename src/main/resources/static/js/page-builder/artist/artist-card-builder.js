@@ -1,6 +1,6 @@
 export let artistCardBuilder =(artist)=>{
     let card = document.createElement('div');
-    card.className = 'card bg-dark regular-text border border-light pb-3 mb-5';
+    card.className = 'card bg-dark regular-text border border-light mb-3';
     let cardHeader = document.createElement('div');
     cardHeader.className = 'card-header';
     cardHeader.innerHTML = artist['name'];

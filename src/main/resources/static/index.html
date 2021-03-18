@@ -88,6 +88,7 @@
     </div>
 </div>
 <!--Modals-->
+<!--Artist Modal-->
 <div class="modal fade" id="artist-create-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -103,6 +104,101 @@
                     <button type="button" class="btn btn-warning me-auto" id="artist-modal-submit">Submit</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Genre Modal-->
+<div class="modal fade" id="genre-create-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create A Genre</h5>
+            </div>
+            <div class="modal-body">
+                <label for="genre-modal-name">Genre Name</label>
+                <input class="form-control mb-2" id="genre-modal-name" type="text">
+                <label for="genre-modal-desc">Genre Description</label>
+                <input class="form-control mb-2" id="genre-modal-desc" type="text">
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <button type="button" class="btn btn-warning me-auto" id="genre-modal-submit">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Playlist Modal-->
+<div class="modal fade" id="playlist-create-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create A Playlist</h5>
+            </div>
+            <div class="modal-body">
+                <label for="playlist-modal-name">Playlist Name</label>
+                <input class="form-control mb-2" id="playlist-modal-name" type="text">
+                <label for="playlist-modal-desc">Playlist Description</label>
+                <input class="form-control mb-2" id="playlist-modal-desc" type="text">
+                <label for="playlist-modal-track-name">Select Your Tracks</label>
+                <div class="input-group" id="playlist-modal-track-list">
+                    <input class="form-control" id="playlist-modal-track-name" type="text">
+                    <select class="form-select" id="playlist-modal-track-select"></select>
+                    <button class="btn btn-info" id="add-track">Add Track</button>
+                </div>
+                <div id="added-tracks"></div>
+            </div>
+            <div class="modal-footer">
+                <div class="input-group">
+                    <button type="button" class="btn btn-warning me-auto" id="playlist-modal-submit">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Album Modal-->
+<div class="modal fade" id="album-create-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create An Album</h5>
+            </div>
+            <div class="modal-body">
+                <label for="album-modal-name">Album Name</label>
+                <input class="form-control mb-2" id="album-modal-name" type="text">
+                <label for="album-artist-modal-name">Artist Name</label>
+                <input class="form-control mb-2" id="album-artist-modal-name" type="text">
+                <label for="album-genre-modal-name">Genre Name</label>
+                <input class="form-control mb-2" id="album-genre-modal-name" type="text">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning me-auto" id="album-modal-submit">Submit</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Track Modal-->
+<div class="modal fade" id="track-create-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create A Track</h5>
+            </div>
+            <div class="modal-body">
+                <label for="track-modal-name">Track Name</label>
+                <input class="form-control mb-2" id="track-modal-name" type="text">
+                <label for="track-modal-duration">Track Duration</label>
+                <input class="form-control mb-2" id="track-modal-duration" type="text">
+                <label for="track-artist-modal-name">Album</label>
+                <input class="form-control mb-2" id="track-artist-modal-name" type="text">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning me-auto" id="track-modal-submit">Submit</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
