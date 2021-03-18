@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/test/resources/features/Artist.feature",
+        features = "src/test/resources/features/Album.feature",
         glue = "com.qa.choonz.acceptance.album.stepdefs"
 )
 public class AlbumTest {

@@ -1,4 +1,4 @@
-package com.qa.choonz.acceptance.playlist.stepdefs;
+package com.qa.choonz.acceptance.track.stepdefs;
 
 import com.qa.choonz.acceptance.utils;
 import io.cucumber.java.After;
@@ -31,13 +31,14 @@ public class MyStepdefs {
         webDriver.get("http://localhost:8082");
     }
 
-    @Given("That I search for an playlist")
-    public void thatISearchForAnPlaylist() {
-        // This function has to be called since playlist creation requires
-        // a user to be logged in
-        utils.registerAndLogin();
+    @Given("That I search for an track")
+    public void thatISearchForAnTrack() throws InterruptedException {
+        // This function has to be called since a album needs an artist assigned to it
+        utils.createArtist();
+        utils.createGenre();
+        utils.createAlbum();
         webElement = webDriver.findElement(By.id("select-bar"));
-        webElement.sendKeys("Playlist");
+        webElement.sendKeys("Track");
         webElement = webDriver.findElement(By.id("search-button"));
         webElement.click();
     }
@@ -45,32 +46,37 @@ public class MyStepdefs {
     @When("I click the add link")
     public void iClickTheAddLink() throws InterruptedException {
         Thread.sleep(500);
-        webElement = webDriver.findElement(By.id("playlist-create-button"));
+        webElement = webDriver.findElement(By.id("track-create-button"));
         webElement.click();
     }
 
     @And("I fill out the modal")
     public void iFillOutTheModal() throws InterruptedException {
         Thread.sleep(500);
-        webElement = webDriver.findElement(By.id("playlist-modal-name"));
-        webElement.sendKeys("Test Playlist");
-        webElement = webDriver.findElement(By.id("playlist-modal-desc"));
-        webElement.sendKeys("Test Playlist Description");
+        webElement = webDriver.findElement(By.id("track-modal-name"));
+        webElement.sendKeys("Test Track");
+        webElement = webDriver.findElement(By.id("track-modal-duration"));
+        webElement.sendKeys("123");
+        webElement = webDriver.findElement(By.id("track-artist-modal-name"));
+        webElement.sendKeys("Test Album");
     }
 
-    @Then("I have successfully created a playlist")
-    public void iHaveSuccessfullyCreatedAPlaylist() {
-        webElement = webDriver.findElement(By.id("playlist-modal-submit"));
+    @Then("I have successfully created an track")
+    public void iHaveSuccessfullyCreatedAnTrack() {
+        webElement = webDriver.findElement(By.id("track-modal-submit"));
         webElement.click();
     }
 
-    @Given("That I search for the playlist name")
-    public void thatISearchForThePlaylistName() throws InterruptedException {
+    @Given("That I search for the track name")
+    public void thatISearchForTheTrackName() throws InterruptedException {
         Thread.sleep(500);
+        webElement = webDriver.findElement(By.id("select-bar"));
+        webElement.sendKeys("Track");
         webElement = webDriver.findElement(By.id("input-bar"));
-        webElement.sendKeys("Test Playlist");
+        webElement.sendKeys("Test Track");
         webElement = webDriver.findElement(By.id("search-button"));
         webElement.click();
+        Thread.sleep(4000);
     }
 
     @Then("They appear in the search results")
@@ -78,8 +84,8 @@ public class MyStepdefs {
         // TODO Verify that the artist appears
     }
 
-    @Given("That I can see the playlist I want to change")
-    public void thatICanSeeThePlaylistIWantToChange() {
+    @Given("That I can see the track I want to change")
+    public void thatICanSeeTheTrackIWantToChange() {
         // TODO Implement update methods
     }
 
@@ -93,27 +99,25 @@ public class MyStepdefs {
         // TODO Implement update methods
     }
 
-    @Then("The playlist has been update")
-    public void thePlaylistHasBeenUpdate() {
+    @Then("The track has been update")
+    public void theTrackHasBeenUpdate() {
         // TODO Implement update methods
     }
 
-    @Given("That I can see the playlist I want to delete")
-    public void thatICanSeeThePlaylistIWantToDelete() {
-        // TODO Verify that playlist exists
+    @Given("That I can see the track I want to delete")
+    public void thatICanSeeTheTrackIWantToDelete() {
     }
 
     @When("I click the cross icon")
     public void iClickTheCrossIcon() throws InterruptedException {
-        // If there aren't any artists already in the database this is 1 if something already exists this will be higher
+        // If there aren't any albums already in the database this is 1 if something already exists this will be higher
         Thread.sleep(500);
-        webElement = webDriver.findElement(By.id("delete-playlists-1"));
+        webElement = webDriver.findElement(By.id("delete-track-1"));
         webElement.click();
     }
 
-    @Then("The playlist has been deleted")
-    public void thePlaylistHasBeenDeleted() {
-        // TODO Verify delete
+    @Then("The track has been deleted")
+    public void theTrackHasBeenDeleted() {
     }
 
     @After

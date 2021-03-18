@@ -100,7 +100,7 @@ public class MyStepdefs {
 
     @When("I click the cross icon")
     public void iClickTheCrossIcon() throws InterruptedException {
-        // If there aren't any artists already in the database this is 1 if something already exists this will be higher
+        // If there aren't any genres already in the database this is 1 if something already exists this will be higher
         Thread.sleep(500);
         webElement = webDriver.findElement(By.id("delete-genre-1"));
         webElement.click();
