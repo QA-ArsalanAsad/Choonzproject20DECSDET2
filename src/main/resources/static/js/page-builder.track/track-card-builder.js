@@ -11,7 +11,7 @@ export let trackCardBuilder =(track)=> {
         if (prop === 'id') {
             continue;
         } else {
-            cardBody.innerHTML += `${prop}: ${track[prop]}` + '\n';
+            cardBody.innerHTML += `${prop}: ${track[prop]} <br>`;
         }
     }
 

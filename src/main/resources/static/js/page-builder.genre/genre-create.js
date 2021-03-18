@@ -25,7 +25,6 @@ let genreSubmit =()=>{
     let genreName = document.querySelector('#genre-modal-name').value;
     let genreDesc = document.querySelector('#genre-modal-desc').value;
     let bodyObj = {'name': genreName, 'description': genreDesc};
-    console.log(bodyObj);
     fetch('/genres/create', {
         method: 'POST',
         headers: {

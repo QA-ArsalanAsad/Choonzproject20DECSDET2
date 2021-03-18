@@ -1,5 +1,6 @@
 import {playlistSearch} from './playlist-search.js';
 import {playlistCreate} from './playlist-create.js';
+import {playlistCardBuilder} from './playlist-card-builder.js';
 
 export let playlistPageBuild = async ()=>{
     let name = document.querySelector('#input-bar').value;
@@ -25,7 +26,21 @@ export let playlistPageBuild = async ()=>{
     let counter = 1;
 
     for (let playlist in playlistList) {
-
+        let playlistCard = playlistCardBuilder(playlistList[playlist]);
+        switch (counter) {
+            case 1:
+                col1.append(playlistCard);
+                counter += 1;
+                break;
+            case 2:
+                col2.append(playlistCard);
+                counter += 1;
+                break;
+            case 3:
+                col3.append(playlistCard);
+                counter = 1;
+                break;
+        }
     }
 
     row.append(col1, col2, col3);
