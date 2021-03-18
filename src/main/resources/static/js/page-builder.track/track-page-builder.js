@@ -1,13 +1,13 @@
-import {albumSearch} from './album-search.js';
-import {albumCardBuilder} from './album-card-builder.js';
-import {albumCreate} from './album-create.js';
+import {trackSearch} from './track-search.js';
+import {trackCardBuilder} from './track-card-builder.js';
+import {trackCreate} from './track-create.js';
 
-export let albumPageBuild = async () =>{
+export let trackPageBuild = async () => {
     let name = document.querySelector('#input-bar').value;
-    let albumList;
-    await albumSearch(name)
+    let trackList;
+    await trackSearch(name)
         .then((response)=>{
-            albumList = response;
+            trackList = response;
         })
 
     let body = document.querySelector('#centre-col');
@@ -25,20 +25,20 @@ export let albumPageBuild = async () =>{
 
     let counter = 1;
 
-    for (let album in albumList) {
-        let albumCard = albumCardBuilder(albumList[album]);
+    for (let track in trackList) {
+        let trackCard = trackCardBuilder(trackList[track]);
         switch (counter) {
             case 1:
-                col1.append(albumCard);
+                col1.append(trackCard);
                 counter += 1;
                 break;
             case 2:
-                col2.append(albumCard);
-                counter += 1
+                col2.append(trackCard);
+                counter += 1;
                 break;
             case 3:
-                col3.append(albumCard);
-                counter = 1;
+                col3.append(trackCard);
+                counter += 1;
                 break;
         }
     }
@@ -47,12 +47,12 @@ export let albumPageBuild = async () =>{
     body.append(row);
 
     let empty;
-    if (albumList.length === 0) {
+    if (trackList.length === 0) {
         empty = 'empty';
     } else {
         empty = 'not empty';
     }
 
-    let createButton = albumCreate(empty);
+    let createButton = trackCreate(empty);
     body.append(createButton);
 }

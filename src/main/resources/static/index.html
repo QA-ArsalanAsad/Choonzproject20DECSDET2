@@ -159,6 +159,7 @@
         </div>
     </div>
 </div>
+<!--Album Modal-->
 <div class="modal fade" id="album-create-modal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -175,6 +176,28 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning me-auto" id="album-modal-submit">Submit</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Track Modal-->
+<div class="modal fade" id="track-create-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create A Track</h5>
+            </div>
+            <div class="modal-body">
+                <label for="track-modal-name">Track Name</label>
+                <input class="form-control mb-2" id="track-modal-name" type="text">
+                <label for="track-modal-duration">Track Duration</label>
+                <input class="form-control mb-2" id="track-modal-duration" type="text">
+                <label for="track-artist-modal-name">Album</label>
+                <input class="form-control mb-2" id="track-artist-modal-name" type="text">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning me-auto" id="track-modal-submit">Submit</button>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
