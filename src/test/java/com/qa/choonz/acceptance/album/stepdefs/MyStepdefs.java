@@ -64,6 +64,7 @@ public class MyStepdefs {
         Thread.sleep(500);
         webElement = webDriver.findElement(By.id("album-modal-name"));
         webElement.sendKeys("Test Album");
+        // TODO Click the submit button
     }
 
     @Then("I have successfully created an album")

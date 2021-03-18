@@ -22,12 +22,13 @@ export let playlistCreate = (isEmpty) => {
 }
 
 let playlistSubmit = async ()=>{
-    let playlistName = document.querySelector('#playlist-modal-name');
-    let playlistDesc = document.querySelector('#playlist-modal-desc');
+    let playlistName = document.querySelector('#playlist-modal-name').value;
+    let playlistDesc = document.querySelector('#playlist-modal-desc').value;
     let bodyObj = {'name': playlistName, 'description': playlistDesc, 'artwork': 'NOT IMPLEMENTED YET'};
     let authToken = sessionStorage.getItem('auth');
+    authToken = authToken.replaceAll('"', '');
     let userID;
-    await fetch(`/user/read/auth${authToken}`)
+    await fetch(`/user/read/auth/${authToken}`)
         .then((response)=>{
             return response.json();
         }).then((responseData)=>{
@@ -48,5 +49,5 @@ let playlistSubmit = async ()=>{
 
 let submitButtonSendAndHide =()=>{
     playlistSubmit();
-    window.genreModal.hide();
+    window.playlistModal.hide();
 }
