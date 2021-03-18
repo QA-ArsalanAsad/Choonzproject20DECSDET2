@@ -1,8 +1,13 @@
 package com.qa.choonz.rest.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -18,6 +23,8 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.choonz.persistence.domain.Album;
+import com.qa.choonz.persistence.domain.Artist;
 import com.qa.choonz.persistence.domain.Genre;
 import com.qa.choonz.rest.dto.GenreDTO;
 
@@ -43,6 +50,7 @@ public class GenreIntegrationControllerTest {
 	private ObjectMapper jsonifier;
 
 	private final String URI = "/genres";
+	private final Genre G_TEST_1 = new Genre("Pop", "generic txt");
 
 	@Test
 	void testCreate() throws Exception {
@@ -60,21 +68,47 @@ public class GenreIntegrationControllerTest {
 
 	@Test
 	void testReadAll() throws Exception {
-
+		RequestBuilder rB = get(URI + "/read", List.of(G_TEST_1));
+		ResultMatcher checkStatus = status().isOk();
+		this.mvc.perform(rB).andExpect(checkStatus);
 	}
 
 	@Test
 	void testReadByID() throws Exception {
+		Genre testGenre = new Genre("Hip Hop", "test");
+		Artist testArtist = new Artist("Drake");
+		Album testAlbum = new Album(1L, "Scorpion", null, null, testGenre, "none");
+		testAlbum.setArtist(testArtist);
+		testAlbum.setTracks(List.of());
+		testGenre.setAlbums(List.of(testAlbum));
+		GenreDTO mapGenre = mapToDTO(testGenre);
+		mapGenre.setId(1L);
+		RequestBuilder rB = get(URI + "/read/1");
+		ResultMatcher checkStatus = status().isOk();
+		ResultMatcher checkBody = content().json(this.jsonifier.writeValueAsString(mapGenre));
+
+		this.mvc.perform(rB).andExpect(checkStatus).andExpect(checkBody);
 
 	}
 
 	@Test
 	void testUpdate() throws Exception {
+		Genre testGenre = new Genre(1L, "Pop updated", "generic txt");
+		testGenre.setAlbums(List.of());
+		GenreDTO mapGenre = mapToDTO(testGenre);
+		mapGenre.setId(1L);
+		RequestBuilder rB = put(URI + "/update" + "/1").contentType(MediaType.APPLICATION_JSON)
+				.content(this.jsonifier.writeValueAsString(testGenre));
+		ResultMatcher checkStatus = status().isAccepted();
+		ResultMatcher checkBody = content().json(this.jsonifier.writeValueAsString(mapGenre));
+
+		this.mvc.perform(rB).andExpect(checkStatus).andExpect(checkBody);
 
 	}
 
 	@Test
 	void testDelete() throws Exception {
+		this.mvc.perform(delete(URI + "/delete/1")).andExpect(status().isNoContent());
 
 	}
 

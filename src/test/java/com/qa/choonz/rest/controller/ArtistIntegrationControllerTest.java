@@ -1,8 +1,13 @@
 package com.qa.choonz.rest.controller;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -18,7 +23,9 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.qa.choonz.persistence.domain.Album;
 import com.qa.choonz.persistence.domain.Artist;
+import com.qa.choonz.persistence.domain.Genre;
 import com.qa.choonz.rest.dto.ArtistDTO;
 
 @SpringBootTest
@@ -60,26 +67,48 @@ public class ArtistIntegrationControllerTest {
 
 	@Test
 	void testReadAll() throws Exception {
+		RequestBuilder rB = get(URI + "/read", List.of(A_TEST_1));
+		ResultMatcher checkStatus = status().isOk();
+		this.mvc.perform(rB).andExpect(checkStatus);
 
 	}
 
 	@Test
 	void testReadByID() throws Exception {
+		Artist testArtist = new Artist(1L, "Kanye West");
+		Genre testGenre = new Genre("Hip Hop", "test");
+		Album testAlbum = new Album(1L, "Scorpion", null, testArtist, null, "none");
+		testAlbum.setTracks(List.of());
+		testAlbum.setGenre(testGenre);
+		testArtist.setAlbums(List.of(testAlbum));
+		ArtistDTO mapArtist = mapToDTO(testArtist);
+		mapArtist.setId(1L);
+		RequestBuilder rB = get(URI + "/read/1");
+		ResultMatcher checkStatus = status().isOk();
+		ResultMatcher checkBody = content().json(this.jsonifier.writeValueAsString(mapArtist));
 
-//		RequestBuilder rB = get(URI + "/read/" + A_TEST_1.getId()).accept(MediaType.APPLICATION_JSON);
-//		ResultMatcher checkStatus = status().isOk();
-//		this.mvc.perform(rB).andExpect(checkStatus)
-//				.andExpect(content().json(this.jsonifier.writeValueAsString(this.mapToDTO(A_TEST_1))));
+		this.mvc.perform(rB).andExpect(checkStatus).andExpect(checkBody);
 
 	}
 
 	@Test
 	void testUpdate() throws Exception {
+		Artist testArtist = new Artist(1L, "Drake updated");
+		testArtist.setAlbums(List.of());
+		ArtistDTO mapArtist = mapToDTO(testArtist);
+		mapArtist.setId(1L);
+		RequestBuilder rB = put(URI + "/update" + "/1").contentType(MediaType.APPLICATION_JSON)
+				.content(this.jsonifier.writeValueAsString(testArtist));
+		ResultMatcher checkStatus = status().isAccepted();
+		ResultMatcher checkBody = content().json(this.jsonifier.writeValueAsString(mapArtist));
+
+		this.mvc.perform(rB).andExpect(checkStatus).andExpect(checkBody);
 
 	}
 
 	@Test
 	void testDelete() throws Exception {
+		this.mvc.perform(delete(URI + "/delete/1")).andExpect(status().isNoContent());
 
 	}
 
