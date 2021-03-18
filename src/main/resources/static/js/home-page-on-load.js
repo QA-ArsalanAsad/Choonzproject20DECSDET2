@@ -1,7 +1,11 @@
 import {populateMenu} from "./user-auth/account-management-dropdown.js";
 import {enableToast} from './user-auth/toasts.js';
 import {getUsernameFromAuth} from './utils.js';
-import {artistPageBuild} from './page-builders/artist/artist-page-builder.js';
+import {artistPageBuild} from './page-builder/artist/artist-page-builder.js';
+import {genrePageBuild} from './page-builder.genre/genre-page-builder.js';
+import {playlistPageBuild} from './page-builder.playlist/playlist-page-builder.js';
+import {albumPageBuild} from './page-builder.album/album-page-builder.js';
+import {trackPageBuild} from './page-builder.track/track-page-builder.js';
 
 let auth = sessionStorage.getItem('auth');
 
@@ -38,6 +42,14 @@ if (auth !== null) {
 let pageBuilder =(type)=>{
     if (type === 'Artist') {
         artistPageBuild();
+    } else if (type === 'Genre') {
+        genrePageBuild();
+    } else if (type === 'Playlist') {
+        playlistPageBuild();
+    } else if (type === 'Album') {
+        albumPageBuild();
+    } else if (type === 'Track') {
+        trackPageBuild();
     }
 }
 let searchButton = document.querySelector('#search-button');
