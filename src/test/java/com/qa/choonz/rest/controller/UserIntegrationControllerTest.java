@@ -24,9 +24,8 @@ import org.springframework.test.web.servlet.ResultMatcher;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.choonz.persistence.domain.Playlist;
-import com.qa.choonz.persistence.domain.Playlist_Track;
-import com.qa.choonz.persistence.domain.Track;
-import com.qa.choonz.rest.dto.PlaylistDTO;
+import com.qa.choonz.persistence.domain.User;
+import com.qa.choonz.rest.dto.UserDTO;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -34,7 +33,7 @@ import com.qa.choonz.rest.dto.PlaylistDTO;
 @Sql(scripts = "classpath:test-drop-all.sql", executionPhase = ExecutionPhase.AFTER_TEST_METHOD)
 @Sql(scripts = { "classpath:test-schema.sql",
 		"classpath:test-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
-public class PlaylistIntegrationControllerTest {
+public class UserIntegrationControllerTest {
 
 	@Autowired
 	private MockMvc mvc;
@@ -42,23 +41,26 @@ public class PlaylistIntegrationControllerTest {
 	@Autowired
 	private ModelMapper mapper;
 
-	private PlaylistDTO mapToDTO(Playlist playlist) {
-		return this.mapper.map(playlist, PlaylistDTO.class);
+	private UserDTO mapToDTO(User user) {
+		return this.mapper.map(user, UserDTO.class);
 	}
 
 	@Autowired
 	private ObjectMapper jsonifier;
 
-	private final String URI = "/playlists";
+	private final String URI = "/user";
 
-	private final Playlist A_TEST_1 = new Playlist(1L, "TestPlaylist1", "description", "artwork");
+	private final User A_TEST_1 = new User(2L, "Nick", "password");
+
+	private final List<User> listOfUser = List.of(A_TEST_1);
 
 	@Test
 	void testCreate() throws Exception {
-		Playlist testDomain = new Playlist(1L, "TestPlaylist1", "description", "artwork");
-		PlaylistDTO testDto = mapToDTO(testDomain);
+		User testDomain = new User("Nick", "password");
+		testDomain.setAuth("none");
+		UserDTO testDto = mapToDTO(testDomain);
 		testDto.setId(1L);
-		RequestBuilder request = post(URI + "/create/1").contentType(MediaType.APPLICATION_JSON)
+		RequestBuilder request = post(URI + "/create").contentType(MediaType.APPLICATION_JSON)
 				.content(this.jsonifier.writeValueAsString(testDto));
 
 		ResultMatcher checkStatus = status().isCreated();
@@ -78,9 +80,12 @@ public class PlaylistIntegrationControllerTest {
 
 	@Test
 	void testReadByID() throws Exception {
-		Playlist testDomain = new Playlist(1L, "sad", "when youre sad", "unknown");
-		testDomain.setTracks(List.of());
-		PlaylistDTO testDto = mapToDTO(testDomain);
+		User testDomain = new User("Nick", "password");
+		Playlist pList = new Playlist(1L, "sad", "when youre sad", "unknown");
+		testDomain.setAuth("none");
+		pList.setTracks(List.of());
+		testDomain.setPlaylists(List.of(pList));
+		UserDTO testDto = mapToDTO(testDomain);
 		testDto.setId(1L);
 		RequestBuilder request = get(URI + "/read" + "/1");
 
@@ -92,9 +97,12 @@ public class PlaylistIntegrationControllerTest {
 
 	@Test
 	void testUpdate() throws Exception {
-		Playlist testDomain = new Playlist(1L, "sad Updated", "when youre sad", "unknown");
-		testDomain.setTracks(List.of());
-		PlaylistDTO testDto = mapToDTO(testDomain);
+		User testDomain = new User("Nick", "password");
+		Playlist pList = new Playlist(1L, "sad", "when youre sad", "unknown");
+		testDomain.setAuth("none");
+		pList.setTracks(List.of());
+		testDomain.setPlaylists(List.of(pList));
+		UserDTO testDto = mapToDTO(testDomain);
 		testDto.setId(1L);
 		RequestBuilder request = put(URI + "/update" + "/1").contentType(MediaType.APPLICATION_JSON)
 				.content(this.jsonifier.writeValueAsString(testDomain));
@@ -115,38 +123,34 @@ public class PlaylistIntegrationControllerTest {
 	}
 
 	@Test
-	void testAddTrack() throws Exception {
-		Playlist testDomain = new Playlist(1L, "sad", "when youre sad", "unknown");
-		Playlist_Track pTrack = new Playlist_Track();
-		pTrack.setId(2L);
-		Track track = new Track("marvins room", 3, "lyrics");
-		track.setId(1L);
-		pTrack.setTrack(track);
-		testDomain.setTracks(List.of(pTrack));
-		PlaylistDTO testDto = mapToDTO(testDomain);
-		testDto.setId(1L);
-		RequestBuilder request = post(URI + "/addtrack" + "/1").contentType(MediaType.APPLICATION_JSON)
+	void testLogin() throws Exception {
+		User testDomain = new User(1L, "Nick", "password");
+		RequestBuilder request = post(URI + "/login").contentType(MediaType.APPLICATION_JSON)
 				.content(this.jsonifier.writeValueAsString(testDomain));
 
-		ResultMatcher checkStatus = status().isAccepted();
-		ResultMatcher checkBody = content().json(this.jsonifier.writeValueAsString(testDto));
+		ResultMatcher checkStatus = status().isOk();
 
-		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
+		this.mvc.perform(request).andExpect(checkStatus);
 	}
 
 	@Test
-	void testRemoveTrack() throws Exception {
-		Playlist testDomain = new Playlist(1L, "sad", "when youre sad", "unknown");
-		testDomain.setTracks(List.of());
-		PlaylistDTO testDto = mapToDTO(testDomain);
-		testDto.setId(1L);
-		RequestBuilder request = delete(URI + "/removetrack" + "/1").contentType(MediaType.APPLICATION_JSON)
-				.content(this.jsonifier.writeValueAsString(testDomain));
+	void testLogout() throws Exception {
+		User testDomain = new User(1L, "Nick", "password");
+		testDomain.setAuth("none");
+		RequestBuilder request = post(URI + "/logout" + "/none");
+
+		ResultMatcher checkStatus = status().isNotFound();
+
+		this.mvc.perform(request).andExpect(checkStatus);
+	}
+
+	@Test
+	void testFindByAuth() throws Exception {
+		RequestBuilder request = get(URI + "/read/auth" + "/none");
 
 		ResultMatcher checkStatus = status().isAccepted();
-		ResultMatcher checkBody = content().json(this.jsonifier.writeValueAsString(testDto));
 
-		this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
+		this.mvc.perform(request).andExpect(checkStatus);
 	}
 
 }
