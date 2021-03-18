@@ -4,6 +4,7 @@ export let trackCardBuilder =(track)=> {
     let cardHeader = document.createElement('div');
     cardHeader.className = 'card-header';
     cardHeader.innerHTML = track['name'];
+    cardHeader.append((deleteTrack(track['id'])));
     let cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 
@@ -17,4 +18,20 @@ export let trackCardBuilder =(track)=> {
 
     card.append(cardHeader, cardBody);
     return card;
+}
+
+let deleteTrack =(id)=>{
+    let deleteButton = document.createElement('button');
+    deleteButton.className = 'cancel';
+    deleteButton.innerHTML = `&#10060`;
+    deleteButton.id = `delete-track-${id}`;
+    deleteButton.addEventListener('click', async ()=>{
+        fetch(`/tracks/delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    })
+    return deleteButton;
 }
