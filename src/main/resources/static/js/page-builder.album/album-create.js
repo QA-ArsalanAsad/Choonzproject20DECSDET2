@@ -4,7 +4,7 @@ export let albumCreate = (isEmpty) => {
     }
     let createButton = document.createElement('button');
     createButton.className = 'button-as-link regular-text';
-    createButton.id = 'artist-create-button';
+    createButton.id = 'album-create-button';
     if (isEmpty === 'empty') {
         createButton.innerHTML = "Looks like it's empty here, click to add something!"
     } else if (isEmpty === 'not empty') {

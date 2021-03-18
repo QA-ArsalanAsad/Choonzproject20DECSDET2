@@ -4,6 +4,7 @@ export let playlistCardBuilder =(playlist)=>{
     let cardHeader = document.createElement('div');
     cardHeader.className = 'card-header';
     cardHeader.innerHTML = playlist['name'];
+    cardHeader.append(deletePlaylist(playlist['id']));
     let cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 
@@ -22,4 +23,20 @@ export let playlistCardBuilder =(playlist)=>{
     card.append(cardHeader, cardBody);
 
     return card;
+}
+
+let deletePlaylist =(id)=>{
+    let deleteButton = document.createElement('button');
+    deleteButton.className = 'cancel';
+    deleteButton.innerHTML = `&#10060`;
+    deleteButton.id = `delete-playlists-${id}`;
+    deleteButton.addEventListener('click', async ()=>{
+        fetch(`/playlists/delete/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    })
+    return deleteButton;
 }
