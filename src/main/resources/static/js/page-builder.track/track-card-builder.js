@@ -4,7 +4,7 @@ export let trackCardBuilder =(track)=> {
     let cardHeader = document.createElement('div');
     cardHeader.className = 'card-header';
     cardHeader.innerHTML = track['name'];
-    cardHeader.append((track['id']));
+    cardHeader.append((deleteTrack(track['id'])));
     let cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 

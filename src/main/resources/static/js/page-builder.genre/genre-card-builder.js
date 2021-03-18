@@ -4,7 +4,7 @@ export let genreCardBuilder =(genre)=>{
     let cardHeader = document.createElement('div');
     cardHeader.className = 'card-header';
     cardHeader.innerHTML = genre['name'];
-    cardHeader.append((genre['id']));
+    cardHeader.append(deleteGenre(genre['id']));
     let cardBody = document.createElement('div');
     cardBody.className = 'card-body';
 
