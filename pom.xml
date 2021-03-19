@@ -11,9 +11,10 @@
 	</parent>
 	<groupId>com.qa</groupId>
 	<artifactId>Choonz</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>Choonz</name>
 	<description>Choonz - The Music Database</description>
+	<packaging>war</packaging>
 
 	<properties>
 		<java.version>11</java.version>
